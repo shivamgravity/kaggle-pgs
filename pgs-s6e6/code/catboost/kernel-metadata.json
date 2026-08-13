@@ -1,0 +1,23 @@
+{
+  "id": "shivamgravity/pgs-s6e6-catboost-benchmark",
+  "id_no": 121664256,
+  "title": "pgs-s6e6-catboost-benchmark",
+  "code_file": "pgs-s6e6-catboost-benchmark.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": false,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": [
+    "gpu"
+  ],
+  "dataset_sources": [
+    "shivamgravity/pgs-s6e6-processed-data-v1"
+  ],
+  "kernel_sources": [],
+  "competition_sources": [
+    "playground-series-s6e6"
+  ],
+  "model_sources": []
+}
