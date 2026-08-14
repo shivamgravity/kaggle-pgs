@@ -1,6 +1,6 @@
 # Predicting Smartphone Addiction
 
-Here, we have another interseting competition dataset.
+Here, we have another interseting competition dataset. You can visit the competition page from here: [Playground Series - August 2026](https://www.kaggle.com/competitions/playground-series-s6e8/overview).
 
 This time, it is to find *smartphone addiction*. Many of us are already showing positive signal for this.
 
