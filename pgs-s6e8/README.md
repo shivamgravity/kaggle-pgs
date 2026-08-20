@@ -18,9 +18,41 @@ Want you understand this concept - learn it on [`numiquo-statistics-explanation`
 
 Here we log the Public Leaderboard (LB) scores of our experiments:
 
-| Kernel | Version | Model | Public LB Score | Notes |
-| :--- | :--- | :--- | :--- | :--- |
-| [pgs-s6e8-xgboost](https://www.kaggle.com/code/shivamgravity/pgs-s6e8-xgboost) | v1 | **XGBoost** | `0.96531` | 5-Fold Stratified CV, Early Stopping |
-| [pgs-s6e8-lightgbm](https://www.kaggle.com/code/shivamgravity/pgs-s6e8-lightgbm) | v1 | **LightGBM** | `0.96464` | 5-Fold Stratified CV, Early Stopping |
-| [pgs-s6e8-hgbc](https://www.kaggle.com/code/shivamgravity/pgs-s6e8-hgbc) | v3 | **HistGradientBoosting** | `0.95856` | 5-Fold Stratified CV |
-| [pgs-s6e8-baseline-logistic-regression](https://www.kaggle.com/code/shivamgravity/pgs-s6e8-baseline-logistic-regression) | v3 | **Logistic Regression** | `0.91385` | Baseline Model, 5-Fold Stratified CV |
+### XGBoost
+**Kernel:** [shivamgravity/pgs-s6e8-xgboost](https://www.kaggle.com/code/shivamgravity/pgs-s6e8-xgboost)
+
+| Version | Public LB Score | Notes |
+| :--- | :--- | :--- |
+| v4 | `0.96657` | Optuna Tuned, Feature Engineered, 5-Fold CV |
+| v2 | `0.96598` | Feature Engineered, 5-Fold CV |
+| v1 | `0.96531` | 5-Fold Stratified CV, Early Stopping |
+
+### CatBoost
+**Kernel:** [shivamgravity/pgs-s6e8-catboost](https://www.kaggle.com/code/shivamgravity/pgs-s6e8-catboost)
+
+| Version | Public LB Score | Notes |
+| :--- | :--- | :--- |
+| v1 | pending | Optuna Tuned, Feature Engineered, 5-Fold CV |
+
+### LightGBM
+**Kernel:** [shivamgravity/pgs-s6e8-lightgbm](https://www.kaggle.com/code/shivamgravity/pgs-s6e8-lightgbm)
+
+| Version | Public LB Score | Notes |
+| :--- | :--- | :--- |
+| v4 | `0.96608` | Optuna Tuned, Feature Engineered, 5-Fold CV |
+| v2 | `0.96526` | Feature Engineered, 5-Fold CV |
+| v1 | `0.96464` | 5-Fold Stratified CV, Early Stopping |
+
+### HistGradientBoosting
+**Kernel:** [shivamgravity/pgs-s6e8-hgbc](https://www.kaggle.com/code/shivamgravity/pgs-s6e8-hgbc)
+
+| Version | Public LB Score | Notes |
+| :--- | :--- | :--- |
+| v3 | `0.95856` | 5-Fold Stratified CV |
+
+### Logistic Regression
+**Kernel:** [shivamgravity/pgs-s6e8-baseline-logistic-regression](https://www.kaggle.com/code/shivamgravity/pgs-s6e8-baseline-logistic-regression)
+
+| Version | Public LB Score | Notes |
+| :--- | :--- | :--- |
+| v3 | `0.91385` | Baseline Model, 5-Fold Stratified CV |
