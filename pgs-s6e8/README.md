@@ -65,7 +65,7 @@ Here we log the Public Leaderboard (LB) scores of our experiments:
 
 | Version | Public LB Score | Notes |
 | :--- | :--- | :--- |
-| v1 | pending | Keras MLP, V5 Features, GPU Accelerated |
+| v2 | `0.94160` | Keras MLP, V5 Features, GPU Accelerated |
 
 ### Logistic Regression
 **Kernel:** [shivamgravity/pgs-s6e8-baseline-logistic-regression](https://www.kaggle.com/code/shivamgravity/pgs-s6e8-baseline-logistic-regression)
