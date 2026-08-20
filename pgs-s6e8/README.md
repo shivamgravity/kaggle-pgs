@@ -18,6 +18,13 @@ Want you understand this concept - learn it on [`numiquo-statistics-explanation`
 
 Here we log the Public Leaderboard (LB) scores of our experiments:
 
+### Blending Ensemble
+**Kernel:** [shivamgravity/pgs-s6e8-ensemble](https://www.kaggle.com/code/shivamgravity/pgs-s6e8-ensemble)
+
+| Version | Public LB Score | Notes |
+| :--- | :--- | :--- |
+| v1 | pending | Weighted Average (XGB, LGBM, CatBoost, NN) |
+
 ### XGBoost
 **Kernel:** [shivamgravity/pgs-s6e8-xgboost](https://www.kaggle.com/code/shivamgravity/pgs-s6e8-xgboost)
 
