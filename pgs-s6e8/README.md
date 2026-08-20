@@ -14,3 +14,12 @@ This time, it is to find *smartphone addiction*. Many of us are already showing 
 
 Want you understand this concept - learn it on [`numiquo-statistics-explanation`](https://youtu.be/QBVzZBsif20?si=GLkXHHz8i1aNv3gW).
 
+## Leaderboard & Experiments
+
+Here we log the Public Leaderboard (LB) scores of our experiments:
+
+| Kernel | Version | Model | Public LB Score | Notes |
+| :--- | :--- | :--- | :--- | :--- |
+| [pgs-s6e8-lightgbm](https://www.kaggle.com/code/shivamgravity/pgs-s6e8-lightgbm) | v1 | **LightGBM** | `0.96464` | 5-Fold Stratified CV, Early Stopping |
+| [pgs-s6e8-hgbc](https://www.kaggle.com/code/shivamgravity/pgs-s6e8-hgbc) | v3 | **HistGradientBoosting** | `0.95856` | 5-Fold Stratified CV |
+| [pgs-s6e8-baseline-logistic-regression](https://www.kaggle.com/code/shivamgravity/pgs-s6e8-baseline-logistic-regression) | v3 | **Logistic Regression** | `0.91385` | Baseline Model, 5-Fold Stratified CV |
