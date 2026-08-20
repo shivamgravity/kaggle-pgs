@@ -50,6 +50,13 @@ Here we log the Public Leaderboard (LB) scores of our experiments:
 | :--- | :--- | :--- |
 | v3 | `0.95856` | 5-Fold Stratified CV |
 
+### Neural Network (MLP)
+**Kernel:** [shivamgravity/pgs-s6e8-neural-network](https://www.kaggle.com/code/shivamgravity/pgs-s6e8-neural-network)
+
+| Version | Public LB Score | Notes |
+| :--- | :--- | :--- |
+| v1 | pending | Keras MLP, V5 Features, GPU Accelerated |
+
 ### Logistic Regression
 **Kernel:** [shivamgravity/pgs-s6e8-baseline-logistic-regression](https://www.kaggle.com/code/shivamgravity/pgs-s6e8-baseline-logistic-regression)
 
