@@ -24,6 +24,7 @@ Here we log the Public Leaderboard (LB) scores of our experiments:
 | Version | Public LB Score | Notes |
 | :--- | :--- | :--- |
 | v4 | `0.96657` | Optuna Tuned, Feature Engineered, 5-Fold CV |
+| v5 | `0.96635` | Deep V5 Features, Optuna Tuned, 5-Fold CV |
 | v2 | `0.96598` | Feature Engineered, 5-Fold CV |
 | v1 | `0.96531` | 5-Fold Stratified CV, Early Stopping |
 
@@ -32,6 +33,7 @@ Here we log the Public Leaderboard (LB) scores of our experiments:
 
 | Version | Public LB Score | Notes |
 | :--- | :--- | :--- |
+| v2 | pending | Deep V5 Features, Optuna Tuned, 5-Fold CV |
 | v1 | pending | Optuna Tuned, Feature Engineered, 5-Fold CV |
 
 ### LightGBM
@@ -39,6 +41,7 @@ Here we log the Public Leaderboard (LB) scores of our experiments:
 
 | Version | Public LB Score | Notes |
 | :--- | :--- | :--- |
+| v5 | `0.96625` | Deep V5 Features, Optuna Tuned, 5-Fold CV |
 | v4 | `0.96608` | Optuna Tuned, Feature Engineered, 5-Fold CV |
 | v2 | `0.96526` | Feature Engineered, 5-Fold CV |
 | v1 | `0.96464` | 5-Fold Stratified CV, Early Stopping |
