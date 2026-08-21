@@ -25,6 +25,13 @@ Here we log the Public Leaderboard (LB) scores of our experiments:
 | :--- | :--- | :--- |
 | v1 | pending | Weighted Average (XGB, LGBM, CatBoost, NN) |
 
+### Pseudo-Labeling (XGBoost)
+**Kernel:** [shivamgravity/pgs-s6e8-pseudo-labeling](https://www.kaggle.com/code/shivamgravity/pgs-s6e8-pseudo-labeling)
+
+| Version | Public LB Score | Notes |
+| :--- | :--- | :--- |
+| v2 | `0.96255` | XGBoost V5 Features, 5-Fold CV, CPU |
+
 ### XGBoost
 **Kernel:** [shivamgravity/pgs-s6e8-xgboost](https://www.kaggle.com/code/shivamgravity/pgs-s6e8-xgboost)
 
