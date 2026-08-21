@@ -40,8 +40,7 @@ Here we log the Public Leaderboard (LB) scores of our experiments:
 
 | Version | Public LB Score | Notes |
 | :--- | :--- | :--- |
-| v4 | pending | Deep V5 Features, 150 Optuna Trials, 5-Fold CV, GPU |
-| v3 | pending | Deep V5 Features, 150 Optuna Trials, 5-Fold CV, CPU |
+| v5 | pending | Deep V5 Features, 150 Optuna Trials, 5-Fold CV, GPU |
 
 ### LightGBM
 **Kernel:** [shivamgravity/pgs-s6e8-lightgbm](https://www.kaggle.com/code/shivamgravity/pgs-s6e8-lightgbm)
