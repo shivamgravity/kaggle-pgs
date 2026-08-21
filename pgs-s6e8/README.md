@@ -40,8 +40,8 @@ Here we log the Public Leaderboard (LB) scores of our experiments:
 
 | Version | Public LB Score | Notes |
 | :--- | :--- | :--- |
-| v2 | pending | Deep V5 Features, Optuna Tuned, 5-Fold CV |
-| v1 | pending | Optuna Tuned, Feature Engineered, 5-Fold CV |
+| v4 | pending | Deep V5 Features, 150 Optuna Trials, 5-Fold CV, GPU |
+| v3 | pending | Deep V5 Features, 150 Optuna Trials, 5-Fold CV, CPU |
 
 ### LightGBM
 **Kernel:** [shivamgravity/pgs-s6e8-lightgbm](https://www.kaggle.com/code/shivamgravity/pgs-s6e8-lightgbm)
@@ -66,6 +66,13 @@ Here we log the Public Leaderboard (LB) scores of our experiments:
 | Version | Public LB Score | Notes |
 | :--- | :--- | :--- |
 | v2 | `0.94160` | Keras MLP, V5 Features, GPU Accelerated |
+
+### TabNet
+**Kernel:** [shivamgravity/pgs-s6e8-tabnet](https://www.kaggle.com/code/shivamgravity/pgs-s6e8-tabnet)
+
+| Version | Public LB Score | Notes |
+| :--- | :--- | :--- |
+| v4 | `0.94166` | TabNet Classifier, V5 Features, 5-Fold CV |
 
 ### Logistic Regression
 **Kernel:** [shivamgravity/pgs-s6e8-baseline-logistic-regression](https://www.kaggle.com/code/shivamgravity/pgs-s6e8-baseline-logistic-regression)
