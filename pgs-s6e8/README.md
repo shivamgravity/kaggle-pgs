@@ -30,6 +30,7 @@ Here we log the Public Leaderboard (LB) scores of our experiments:
 
 | Version | Public LB Score | Notes |
 | :--- | :--- | :--- |
+| v3 | `0.96263` | Loaded XGBoost v5 predictions, 5-Fold CV, CPU |
 | v2 | `0.96255` | XGBoost V5 Features, 5-Fold CV, CPU |
 
 ### XGBoost
