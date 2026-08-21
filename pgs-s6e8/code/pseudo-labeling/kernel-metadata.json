@@ -13,6 +13,8 @@
   "competition_sources": [
     "playground-series-s6e8"
   ],
-  "kernel_sources": [],
+  "kernel_sources": [
+    "shivamgravity/pgs-s6e8-xgboost"
+  ],
   "model_sources": []
 }
