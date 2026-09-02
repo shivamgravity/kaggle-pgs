@@ -18,13 +18,6 @@ Want you understand this concept - learn it on [`numiquo-statistics-explanation`
 
 Here we log the Public Leaderboard (LB) scores of our experiments:
 
-### Blending Ensemble
-**Kernel:** [shivamgravity/pgs-s6e8-ensemble](https://www.kaggle.com/code/shivamgravity/pgs-s6e8-ensemble)
-
-| Version | Public LB Score | Notes |
-| :--- | :--- | :--- |
-| v1 | pending | Weighted Average (XGB, LGBM, CatBoost, NN) |
-
 ### Pseudo-Labeling (XGBoost)
 **Kernel:** [shivamgravity/pgs-s6e8-pseudo-labeling](https://www.kaggle.com/code/shivamgravity/pgs-s6e8-pseudo-labeling)
 
@@ -42,13 +35,6 @@ Here we log the Public Leaderboard (LB) scores of our experiments:
 | v5 | `0.96635` | Deep V5 Features, Optuna Tuned, 5-Fold CV |
 | v2 | `0.96598` | Feature Engineered, 5-Fold CV |
 | v1 | `0.96531` | 5-Fold Stratified CV, Early Stopping |
-
-### CatBoost
-**Kernel:** [shivamgravity/pgs-s6e8-catboost](https://www.kaggle.com/code/shivamgravity/pgs-s6e8-catboost)
-
-| Version | Public LB Score | Notes |
-| :--- | :--- | :--- |
-| v5 | pending | Deep V5 Features, 150 Optuna Trials, 5-Fold CV, GPU |
 
 ### LightGBM
 **Kernel:** [shivamgravity/pgs-s6e8-lightgbm](https://www.kaggle.com/code/shivamgravity/pgs-s6e8-lightgbm)
@@ -87,3 +73,11 @@ Here we log the Public Leaderboard (LB) scores of our experiments:
 | Version | Public LB Score | Notes |
 | :--- | :--- | :--- |
 | v3 | `0.91385` | Baseline Model, 5-Fold Stratified CV |
+
+
+## Private LB Rank & Score
+
+| Score | Rank |
+|:---|:---|
+| 0.96626 | 1352 |
+
