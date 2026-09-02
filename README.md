@@ -31,8 +31,8 @@ kaggle-pgs/
 | :--- | :--- | :---: | :---: | :---: | :--- |
 | *Playground S6E8* | [`pgs-s6e8/`](./pgs-s6e8) | 0.96657 | 0.96626 | 1352 | AUC-ROC |
 | *Playground S6E6* | [`pgs-s6e6/`](./pgs-s6e6) | 0.95841 | 0.95742 | 1752 | Balanced Accuracy |
-| *Playground S6E5* | - | 0.94623 | 0.94655 | 1896 | AUC-ROC |
-| *Playground S6E4* | - | 0.96703 | 0.96900 | 1614 | Balanced Accuracy |
-| *Playground S5E10* | - | 0.05581 | 0.05609 | 2793 | RMSE |
-| *Playground S5E8* | - | 0.89330 | 0.89110 | 2690 | AUC-ROC |
-| *Playground S4E11* | - | 0.93987 | 0.93881 | 1577 | Accuracy Score |
+| *Playground S6E5* | `NaN` | 0.94623 | 0.94655 | 1896 | AUC-ROC |
+| *Playground S6E4* | `NaN` | 0.96703 | 0.96900 | 1614 | Balanced Accuracy |
+| *Playground S5E10* | `NaN` | 0.05581 | 0.05609 | 2793 | RMSE |
+| *Playground S5E8* | `NaN` | 0.89330 | 0.89110 | 2690 | AUC-ROC |
+| *Playground S4E11* | `NaN` | 0.93987 | 0.93881 | 1577 | Accuracy Score |
