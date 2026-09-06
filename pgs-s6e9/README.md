@@ -34,3 +34,11 @@ Here I log the Public Leaderboard (LB) scores of my experiments:
 |:---|:---|:---|
 | v4 | `0.93738` | Logistic Regression - test_train_split |
 | v5 | `0.93737` | Logistic Regression - 5 Fold CV |
+
+### Light GBM
+
+**Kernel:** [shivamgravity/pgs-s6e9-lightgbm](https://www.kaggle.com/code/shivamgravity/pgs-s6e9-lightgbm)
+
+| Version | Public LB Score | Notes |
+|:---|:---|:---|
+| v1 | `0.94167` | 5 Fold CV |
