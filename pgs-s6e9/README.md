@@ -33,4 +33,4 @@ Here I log the Public Leaderboard (LB) scores of my experiments:
 | Version | Public LB Score | Notes |
 |:---|:---|:---|
 | v4 | `0.93738` | Logistic Regression - test_train_split |
-
+| v5 | `0.93737` | Logistic Regression - 5 Fold CV |
