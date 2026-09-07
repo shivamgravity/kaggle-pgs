@@ -42,3 +42,5 @@ Here I log the Public Leaderboard (LB) scores of my experiments:
 | Version | Public LB Score | Notes |
 |:---|:---|:---|
 | v1 | `0.94167` | 5 Fold CV |
+| v2 | `pending` | 5 Fold CV + Optuna + Best Params Saved |
+| v3 | `pending` | 5 Fold CV + Optuna + Best Params + All Optuna Trials Saved |
