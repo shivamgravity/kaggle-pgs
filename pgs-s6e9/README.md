@@ -40,7 +40,7 @@ Here I log the Public Leaderboard (LB) scores of my experiments:
 **Kernel:** [shivamgravity/pgs-s6e9-lightgbm](https://www.kaggle.com/code/shivamgravity/pgs-s6e9-lightgbm)
 
 | Version | Public LB Score | Notes |
-|:---|:---|:---|
+|:---:|:---:|:---|
 | v1 | `0.94167` | 5 Fold CV |
-| v2 | `pending` | 5 Fold CV + Optuna + Best Params Saved |
-| v3 | `pending` | 5 Fold CV + Optuna + Best Params + All Optuna Trials Saved |
+| v2 | `0.94202` | 5 Fold CV + Optuna + Best Params Saved |
+| v3 | `0.94191` | 5 Fold CV + Optuna + Best Params + All Optuna Trials Saved |
