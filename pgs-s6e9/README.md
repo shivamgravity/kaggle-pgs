@@ -26,9 +26,13 @@ Want you understand this concept - learn it on [`numiquo-statistics-explanation`
 
 Here I log the Public Leaderboard (LB) scores of my experiments:
 
+**Best model:** Light-GBM
+
 ### Baseline
 
 **Kernel:** [shivamgravity/pgs-s6e9-baseline](https://www.kaggle.com/code/shivamgravity/pgs-s6e9-baseline)
+
+**Best version:** `v4`
 
 | Version | Public LB Score | Notes |
 |:---|:---|:---|
@@ -39,9 +43,12 @@ Here I log the Public Leaderboard (LB) scores of my experiments:
 
 **Kernel:** [shivamgravity/pgs-s6e9-lightgbm](https://www.kaggle.com/code/shivamgravity/pgs-s6e9-lightgbm)
 
+**Best version:** `v4`
+
 | Version | Public LB Score | Notes |
 |:---:|:---:|:---|
 | v1 | `0.94167` | 5 Fold CV |
 | v2 | `0.94202` | 5 Fold CV + Optuna + Best Params Saved |
 | v3 | `0.94191` | 5 Fold CV + Optuna + Best Params + All Optuna Trials Saved |
 | v4 | `0.94205` | v3 + optimized params scope |
+| v5 | `0.94194` | v4 + optimized params scope |
