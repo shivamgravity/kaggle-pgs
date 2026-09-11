@@ -52,3 +52,5 @@ Here I log the Public Leaderboard (LB) scores of my experiments:
 | v3 | `0.94191` | 5 Fold CV + Optuna + Best Params + All Optuna Trials Saved |
 | v4 | `0.94205` | v3 + optimized params scope |
 | v5 | `0.94194` | v4 + optimized params scope |
+| v6 | `0.75494` | v5 - Standard Scaler |
+| v7 | `NaN` | v6 - Optuna - OHE + Native Categorical Handling + best_params_v4 |
