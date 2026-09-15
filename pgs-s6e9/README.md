@@ -55,3 +55,14 @@ Here I log the Public Leaderboard (LB) scores of my experiments:
 | v6 | `0.75494` | v5 - Standard Scaler |
 | v10 | `0.94202` | v6 - Optuna - OHE + Native Categorical Handling + best_params_v4 |
 | v13 | `0.88447` | v10 + StandardScaler |
+
+### Catboost
+
+**Kernel:** [shivamgravity/pgs-s6e9-catboost](https://www.kaggle.com/code/shivamgravity/pgs-s6e9-catboost)
+
+**Best version:** v6
+
+| Version | Public LB Score | Notes |
+|:---:|:---:|:---|
+| v6 | `0.94151` | Optuna + GPU: NvidiaTeslaT4 |
+
