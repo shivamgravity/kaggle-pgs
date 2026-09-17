@@ -82,3 +82,13 @@ Here I log the Public Leaderboard (LB) scores of my experiments:
 |:---:|:---:|:---|
 | v4 | `0.94191` | Optuna + enable_categorical=True |
 | v5 | `0.94194` | v4 + narrowed params search space |
+
+### Ensemble
+
+**Kernel:** [shivamgravity/pgs-s6e9-ensemble](https://www.kaggle.com/code/shivamgravity/pgs-s6e9-ensemble)
+
+**Benchmark version:** `v1`
+
+| Version | Public LB Score | Notes |
+|:---:|:---:|:---|
+| v1 | `0.94193` | xgb + catboost + lgbm with best params |
