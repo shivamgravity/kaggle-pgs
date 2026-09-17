@@ -70,6 +70,7 @@ Here I log the Public Leaderboard (LB) scores of my experiments:
 | v9 | `0.94192` | v8 + optimized params search space |
 | v10 | `0.94151` | v9 + adjusted params search space |
 | v11 | `0.94195` | around v9 search space |
+| v12 | `0.94152` | final optuna with focused v9 parasms |
 
 ### XG Boost
 
