@@ -60,12 +60,14 @@ Here I log the Public Leaderboard (LB) scores of my experiments:
 
 **Kernel:** [shivamgravity/pgs-s6e9-catboost](https://www.kaggle.com/code/shivamgravity/pgs-s6e9-catboost)
 
-**Best version:** `v7`
+**Best version:** `v9`
 
 | Version | Public LB Score | Notes |
 |:---:|:---:|:---|
 | v6 | `0.94151` | Optuna + GPU: NvidiaTeslaT4 |
 | v7 | `0.94169` | v6 + narrowed params search space |
+| v8 | `0.94183` | v7 + narrowed params search space |
+| v9 | `0.94192` | v8 + optimized params search space |
 
 ### XG Boost
 
