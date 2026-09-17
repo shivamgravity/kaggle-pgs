@@ -60,7 +60,7 @@ Here I log the Public Leaderboard (LB) scores of my experiments:
 
 **Kernel:** [shivamgravity/pgs-s6e9-catboost](https://www.kaggle.com/code/shivamgravity/pgs-s6e9-catboost)
 
-**Benchmark version:** `v9`
+**Benchmark version:** `v11`
 
 | Version | Public LB Score | Notes |
 |:---:|:---:|:---|
@@ -69,6 +69,7 @@ Here I log the Public Leaderboard (LB) scores of my experiments:
 | v8 | `0.94183` | v7 + narrowed params search space |
 | v9 | `0.94192` | v8 + optimized params search space |
 | v10 | `0.94151` | v9 + adjusted params search space |
+| v11 | `0.94195` | around v9 search space |
 
 ### XG Boost
 
