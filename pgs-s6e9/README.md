@@ -26,13 +26,13 @@ Want you understand this concept - learn it on [`numiquo-statistics-explanation`
 
 Here I log the Public Leaderboard (LB) scores of my experiments:
 
-**Best model:** Light-GBM
+**Benchmark Model:** Light-GBM (v4)
 
 ### Baseline
 
 **Kernel:** [shivamgravity/pgs-s6e9-baseline](https://www.kaggle.com/code/shivamgravity/pgs-s6e9-baseline)
 
-**Best version:** `v4`
+**Benchmark version:** `v4`
 
 | Version | Public LB Score | Notes |
 |:---|:---|:---|
@@ -43,7 +43,7 @@ Here I log the Public Leaderboard (LB) scores of my experiments:
 
 **Kernel:** [shivamgravity/pgs-s6e9-lightgbm](https://www.kaggle.com/code/shivamgravity/pgs-s6e9-lightgbm)
 
-**Best version:** `v4`
+**Benchmark version:** `v4`
 
 | Version | Public LB Score | Notes |
 |:---:|:---:|:---|
@@ -60,7 +60,7 @@ Here I log the Public Leaderboard (LB) scores of my experiments:
 
 **Kernel:** [shivamgravity/pgs-s6e9-catboost](https://www.kaggle.com/code/shivamgravity/pgs-s6e9-catboost)
 
-**Best version:** `v9`
+**Benchmark version:** `v9`
 
 | Version | Public LB Score | Notes |
 |:---:|:---:|:---|
@@ -68,12 +68,13 @@ Here I log the Public Leaderboard (LB) scores of my experiments:
 | v7 | `0.94169` | v6 + narrowed params search space |
 | v8 | `0.94183` | v7 + narrowed params search space |
 | v9 | `0.94192` | v8 + optimized params search space |
+| v10 | `0.94151` | v9 + adjusted params search space |
 
 ### XG Boost
 
 **Kernel:** [shivamgravity/pgs-s6e9-xgboost](https://www.kaggle.com/code/shivamgravity/pgs-s6e9-xgboost)
 
-**Best version:** `v5`
+**Benchmark version:** `v5`
 
 | Version | Public LB Score | Notes |
 |:---:|:---:|:---|
