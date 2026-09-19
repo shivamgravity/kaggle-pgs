@@ -93,3 +93,4 @@ Here I log the Public Leaderboard (LB) scores of my experiments:
 |:---:|:---:|:---|
 | v2 | `0.94205` | Mean aggregation, best_params: xgb, catboost, lgbm. |
 | v3 | `0.94205` | Optimize ensemble weights via grid search |
+| v6 | `0.94184` | Meta model: logistic regression, stacking |
