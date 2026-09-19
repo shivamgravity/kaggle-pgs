@@ -87,8 +87,9 @@ Here I log the Public Leaderboard (LB) scores of my experiments:
 
 **Kernel:** [shivamgravity/pgs-s6e9-ensemble](https://www.kaggle.com/code/shivamgravity/pgs-s6e9-ensemble)
 
-**Benchmark version:** `v2`
+**Benchmark version:** `v2`, `v3`
 
 | Version | Public LB Score | Notes |
 |:---:|:---:|:---|
 | v2 | `0.94205` | Mean aggregation, best_params: xgb, catboost, lgbm. |
+| v3 | `0.94205` | Optimize ensemble weights via grid search |
