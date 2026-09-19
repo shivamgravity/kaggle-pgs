@@ -87,8 +87,8 @@ Here I log the Public Leaderboard (LB) scores of my experiments:
 
 **Kernel:** [shivamgravity/pgs-s6e9-ensemble](https://www.kaggle.com/code/shivamgravity/pgs-s6e9-ensemble)
 
-**Benchmark version:** `v1`
+**Benchmark version:** `v2`
 
 | Version | Public LB Score | Notes |
 |:---:|:---:|:---|
-| v1 | `0.94193` | xgb + catboost + lgbm with best params |
+| v2 | `0.94205` | Mean aggregation, best_params: xgb, catboost, lgbm. |
