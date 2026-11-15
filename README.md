@@ -29,7 +29,7 @@ kaggle-pgs/
 
 | Competition | Folder | Public LB | Private LB | Private Rank | Evaluation Metric |
 | :--- | :--- | :---: | :---: | :---: | :--- |
-| *Playground S6E11* | [`pgs-s6e11`](./pgs-s6e11/) | `NaN` | `NaN` | `NaN` | AUC-ROC |
+| *Playground S6E11* | [`pgs-s6e11`](./pgs-s6e11/) | 0.94755 | `NaN` | `NaN` | AUC-ROC |
 | *Playground S6E10* | [`pgs-s6e10/`](./pgs-s6e10/) | 0.95698 | 0.95795 | 3332 | AUC-ROC |
 | *Playground S6E9* | [`pgs-s6e9/`](./pgs-s6e9/)| 0.94205 | 0.94141 | 1876 | AUC-ROC |
 | *Playground S6E8* | [`pgs-s6e8/`](./pgs-s6e8) | 0.96657 | 0.96626 | 1352 | AUC-ROC |
