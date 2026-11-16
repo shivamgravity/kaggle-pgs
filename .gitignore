@@ -4,3 +4,4 @@ submission/
 private/
 output/
 *.png
+catboost_info/
