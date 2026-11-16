@@ -61,7 +61,7 @@ To prevent data leakage and provide consistent out-of-fold (OOF) evaluation that
 
 | Version | 5-Fold OOF ROC-AUC | PR-AUC | Public LB | Notes |
 |:---:|:---:|:---:|:---:|:---|
-| v2 | *Running* | *Running* | *Pending* | Block A (Cents/Benford), Block B (Risk Interactions), Block C (Combos), Block D (In-Fold Target Encoding) |
+| v2 | `0.94567` | `0.50321` | `0.94673` | Block A-D (Cents, Benford, Risk flags, In-Fold TE). Confirmed feature dilution effect; CV and LB track closely |
 
 ### LightGBM (Shallow Trees)
 
