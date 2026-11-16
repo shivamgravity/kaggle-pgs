@@ -37,7 +37,15 @@ To prevent data leakage and provide consistent out-of-fold (OOF) evaluation that
 
 ## 🏆 Leaderboard & Experiments
 
-**Benchmark Model:** GLM Residual Boosting (v1) - `0.94782`
+**Benchmark Model:** Dual GLM Residual Booster Blend (v1) - `0.94792`
+
+### Dual GLM Residual Booster Blend
+
+**Kernel:** [shivamgravity/pgs-s6e11-dual-glm-blend](https://www.kaggle.com/code/shivamgravity/pgs-s6e11-dual-glm-blend)
+
+| Version | 5-Fold OOF ROC-AUC | PR-AUC | Public LB | Notes |
+|:---:|:---:|:---:|:---:|:---|
+| v1 | **`0.94745`** | **`0.51534`** | **`0.94792`** | Optimal Rank Blend (29% LightGBM GLM + 71% XGBoost GLM), all-time record PR-AUC |
 
 ### GLM Residual Boosting (LightGBM)
 

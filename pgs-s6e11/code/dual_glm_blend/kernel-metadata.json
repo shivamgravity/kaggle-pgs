@@ -1,0 +1,21 @@
+{
+  "id": "shivamgravity/pgs-s6e11-dual-glm-blend",
+  "title": "pgs-s6e11-dual-glm-blend",
+  "code_file": "model.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": "false",
+  "enable_gpu": "false",
+  "enable_tpu": "false",
+  "enable_internet": "true",
+  "machine_shape": "",
+  "dataset_sources": [],
+  "competition_sources": [
+    "playground-series-s6e11"
+  ],
+  "kernel_sources": [
+    "shivamgravity/pgs-s6e11-glm-boost",
+    "shivamgravity/pgs-s6e11-xgb-glm-boost"
+  ],
+  "model_sources": []
+}
