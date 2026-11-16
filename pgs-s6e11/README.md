@@ -37,7 +37,31 @@ To prevent data leakage and provide consistent out-of-fold (OOF) evaluation that
 
 ## 🏆 Leaderboard & Experiments
 
-**Benchmark Model:** LightGBM (v1) - `0.94755`
+**Benchmark Model:** GLM Residual Boosting (v1) - `0.94782`
+
+### GLM Residual Boosting
+
+**Kernel:** [shivamgravity/pgs-s6e11-glm-boost](https://www.kaggle.com/code/shivamgravity/pgs-s6e11-glm-boost)
+
+| Version | 5-Fold OOF ROC-AUC | PR-AUC | Public LB | Notes |
+|:---:|:---:|:---:|:---:|:---|
+| v1 | `0.94708` | `0.51306` | **`0.94782`** | Logistic Regression log-odds margin ($z_i$) as LightGBM `init_score`, `num_leaves=4`, `max_depth=3`, lr=0.03 |
+
+### Multi-Model Ensemble & Stacking
+
+**Kernel:** [shivamgravity/pgs-s6e11-ensemble](https://www.kaggle.com/code/shivamgravity/pgs-s6e11-ensemble)
+
+| Version | 5-Fold OOF ROC-AUC | PR-AUC | Public LB | Notes |
+|:---:|:---:|:---:|:---:|:---|
+| v1 | `0.94735` | `0.51095` | `0.94768` | 4-Model 5-Fold CV (LGBM + XGB + CatBoost + LR), Optimal Rank Blend (LGBM 44.3% + XGB 55.7%) |
+
+### Feature Engineering Ladder
+
+**Kernel:** [shivamgravity/pgs-s6e11-feature-engineering](https://www.kaggle.com/code/shivamgravity/pgs-s6e11-feature-engineering)
+
+| Version | 5-Fold OOF ROC-AUC | PR-AUC | Public LB | Notes |
+|:---:|:---:|:---:|:---:|:---|
+| v2 | *Running* | *Running* | *Pending* | Block A (Cents/Benford), Block B (Risk Interactions), Block C (Combos), Block D (In-Fold Target Encoding) |
 
 ### LightGBM (Shallow Trees)
 
@@ -70,4 +94,5 @@ To prevent data leakage and provide consistent out-of-fold (OOF) evaluation that
 | Version | 5-Fold OOF ROC-AUC | PR-AUC | Public LB | Notes |
 |:---:|:---:|:---:|:---:|:---|
 | v1 | `0.94190` | `0.48966` | `0.94257` | 5-Fold Stratified CV (mean: 0.94193 ± 0.00343), StandardScaler + OneHotEncoder |
+
 
