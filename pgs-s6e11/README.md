@@ -53,7 +53,7 @@ To prevent data leakage and provide consistent out-of-fold (OOF) evaluation that
 
 | Version | 5-Fold OOF ROC-AUC | PR-AUC | Public LB | Notes |
 |:---:|:---:|:---:|:---:|:---|
-| v1 | *Queued* | *Queued* | *Pending* | Logistic Regression log-odds margin ($z_i$) as XGBoost `base_margin`, GPU hist, `max_depth=3`, lr=0.03 |
+| v1 | `0.94739` | `0.51504` | `0.94780` | Logistic Regression log-odds margin ($z_i$) as XGBoost `base_margin`, GPU hist, `max_depth=3`, lr=0.03 |
 
 ### Multi-Model Ensemble & Stacking
 
