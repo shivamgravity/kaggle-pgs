@@ -45,6 +45,14 @@ To prevent data leakage and provide consistent out-of-fold (OOF) evaluation that
 |:---:|:---:|:---:|:---:|:---|
 | v1 | - | - | **`0.95152`** | 85% Digit-Key TE Booster Blend + 15% Dual GLM Raw Feature Booster. Spearman corr 0.9657. Advanced to **Rank #638**! |
 
+### True Dual-Margin GLM Residual Booster (LightGBM + XGBoost)
+
+**Kernel:** [shivamgravity/pgs-s6e11-dual-glm-digit-te-boost](https://www.kaggle.com/code/shivamgravity/pgs-s6e11-dual-glm-digit-te-boost)
+
+| Version | 5-Fold OOF ROC-AUC | PR-AUC | Public LB | Notes |
+|:---:|:---:|:---:|:---:|:---|
+| v1 | **`0.95064`** | **`0.53180`** | `0.95130` | Dual margin offsets (init_score for LGBM + base_margin for XGBoost) + COUNT_COLS in trees. Record 0.53180 OOF PR-AUC. |
+
 ### Digit-Key Target Encoding & GLM Residual Booster Blend
 
 **Kernel:** [shivamgravity/pgs-s6e11-glm-digit-te-boost](https://www.kaggle.com/code/shivamgravity/pgs-s6e11-glm-digit-te-boost)
