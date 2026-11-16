@@ -37,7 +37,13 @@ To prevent data leakage and provide consistent out-of-fold (OOF) evaluation that
 
 ## 🏆 Leaderboard & Experiments
 
-**Benchmark Model:** Digit-Key Target Encoding & GLM Residual Booster Blend (v1) - `0.95149` (Rank #645)
+**Benchmark Model:** Cross-Paradigm Optimal Rank Blend (v1) - `0.95152` (Rank #638)
+
+### Cross-Paradigm Optimal Rank Blend
+
+| Version | 5-Fold OOF ROC-AUC | PR-AUC | Public LB | Notes |
+|:---:|:---:|:---:|:---:|:---|
+| v1 | - | - | **`0.95152`** | 85% Digit-Key TE Booster Blend + 15% Dual GLM Raw Feature Booster. Spearman corr 0.9657. Advanced to **Rank #638**! |
 
 ### Digit-Key Target Encoding & GLM Residual Booster Blend
 
