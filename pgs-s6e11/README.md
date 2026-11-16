@@ -53,7 +53,7 @@ To prevent data leakage and provide consistent out-of-fold (OOF) evaluation that
 
 | Version | 5-Fold OOF ROC-AUC | PR-AUC | Public LB | Notes |
 |:---:|:---:|:---:|:---:|:---|
-| v1 | *Running on Kaggle* | *Running* | *Pending* | 5-Fold Stratified CV, GPU accelerated (`tree_method='hist'`), shallow depth (`max_depth=3`), lr=0.05 |
+| v1 | `0.94715` | `0.51105` | `0.94753` | 5-Fold Stratified CV, GPU accelerated (`tree_method='hist'`), shallow depth (`max_depth=3`), lr=0.05 |
 
 ### CatBoost (GPU Symmetric Trees)
 
@@ -61,7 +61,7 @@ To prevent data leakage and provide consistent out-of-fold (OOF) evaluation that
 
 | Version | 5-Fold OOF ROC-AUC | PR-AUC | Public LB | Notes |
 |:---:|:---:|:---:|:---:|:---|
-| v1 | *Running on Kaggle* | *Running* | *Pending* | 5-Fold Stratified CV, GPU accelerated (`task_type='GPU'`), `depth=4`, native `cat_features` |
+| v1 | `0.94467` | `0.50388` | `0.94565` | 5-Fold Stratified CV, GPU accelerated (`task_type='GPU'`), `depth=4`, native `cat_features` |
 
 ### Baseline (Logistic Regression)
 
@@ -71,27 +71,3 @@ To prevent data leakage and provide consistent out-of-fold (OOF) evaluation that
 |:---:|:---:|:---:|:---:|:---|
 | v1 | `0.94190` | `0.48966` | `0.94257` | 5-Fold Stratified CV (mean: 0.94193 ± 0.00343), StandardScaler + OneHotEncoder |
 
----
-
-## 📁 Directory Layout
-
-```text
-pgs-s6e11/
-├── dataset/
-│   ├── train.csv              # 699,960 rows, 26 features
-│   ├── test.csv               # 299,984 rows, 25 features
-│   └── sample_submission.csv  # 299,984 rows
-├── code/
-│   ├── baseline/
-│   │   ├── kernel-metadata.json
-│   │   └── model.ipynb
-│   ├── eda/
-│   │   ├── kernel-metadata.json
-│   │   └── eda.ipynb
-│   └── lightgbm/
-│       ├── kernel-metadata.json
-│       └── model.ipynb
-├── submission/
-│   └── baseline_submission.csv
-└── README.md
-```
