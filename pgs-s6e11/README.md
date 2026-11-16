@@ -39,13 +39,21 @@ To prevent data leakage and provide consistent out-of-fold (OOF) evaluation that
 
 **Benchmark Model:** GLM Residual Boosting (v1) - `0.94782`
 
-### GLM Residual Boosting
+### GLM Residual Boosting (LightGBM)
 
 **Kernel:** [shivamgravity/pgs-s6e11-glm-boost](https://www.kaggle.com/code/shivamgravity/pgs-s6e11-glm-boost)
 
 | Version | 5-Fold OOF ROC-AUC | PR-AUC | Public LB | Notes |
 |:---:|:---:|:---:|:---:|:---|
 | v1 | `0.94708` | `0.51306` | **`0.94782`** | Logistic Regression log-odds margin ($z_i$) as LightGBM `init_score`, `num_leaves=4`, `max_depth=3`, lr=0.03 |
+
+### XGBoost GLM Residual Boosting
+
+**Kernel:** [shivamgravity/pgs-s6e11-xgb-glm-boost](https://www.kaggle.com/code/shivamgravity/pgs-s6e11-xgb-glm-boost)
+
+| Version | 5-Fold OOF ROC-AUC | PR-AUC | Public LB | Notes |
+|:---:|:---:|:---:|:---:|:---|
+| v1 | *Queued* | *Queued* | *Pending* | Logistic Regression log-odds margin ($z_i$) as XGBoost `base_margin`, GPU hist, `max_depth=3`, lr=0.03 |
 
 ### Multi-Model Ensemble & Stacking
 
