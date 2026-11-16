@@ -37,7 +37,15 @@ To prevent data leakage and provide consistent out-of-fold (OOF) evaluation that
 
 ## 🏆 Leaderboard & Experiments
 
-**Benchmark Model:** Dual GLM Residual Booster Blend (v1) - `0.94792`
+**Benchmark Model:** Digit-Key Target Encoding & GLM Residual Booster Blend (v1) - `0.95149` (Rank #645)
+
+### Digit-Key Target Encoding & GLM Residual Booster Blend
+
+**Kernel:** [shivamgravity/pgs-s6e11-glm-digit-te-boost](https://www.kaggle.com/code/shivamgravity/pgs-s6e11-glm-digit-te-boost)
+
+| Version | 5-Fold OOF ROC-AUC | PR-AUC | Public LB | Notes |
+|:---:|:---:|:---:|:---:|:---|
+| v1 | **`0.95062`** | **`0.53154`** | **`0.95149`** | In-fold smoothed digit target encoding + GLM margin offset + shallow trees (65% XGB-GLM + 35% LGBM 3-leaves). Jumped to **Rank #645**! |
 
 ### Dual GLM Residual Booster Blend
 
