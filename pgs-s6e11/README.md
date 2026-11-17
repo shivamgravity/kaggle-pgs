@@ -37,7 +37,13 @@ To prevent data leakage and provide consistent out-of-fold (OOF) evaluation that
 
 ## 🏆 Leaderboard & Experiments
 
-**Benchmark Model:** Master Tri-Paradigm Blend (v1) - `0.95152` (OOF ROC-AUC: `0.95073`, PR-AUC: `0.53247`)
+**Benchmark Model:** GPT-2 Language Models + GBDT Boosters + Tabular ResNet Hybrid (v1) - **`0.95218`** (Rank **#532**, OOF ROC-AUC: **`0.951631`**, PR-AUC: **`0.539003`**)
+
+### GPT-2 Language Model + GBDT Boosters + Tabular ResNet Hybrid
+
+| Version | 5-Fold OOF ROC-AUC | PR-AUC | Public LB | Notes |
+|:---:|:---:|:---:|:---:|:---|
+| v1 | **`0.951631`** | **`0.539003`** | **`0.95218`** | 🏆 **NEW ALL-TIME RECORD (Rank #532)!** 49.5% GPT-2 Language Models (megalm + lm7) + 47.2% GLM-offset GBDT Boosters (Joint TE + Dual Margin + 1D) + 3.3% Tabular Deep ResNet. Broke past 0.9520 barrier! |
 
 ### Velocity & Burst Interaction Augmented Triple GLM Residual Booster
 

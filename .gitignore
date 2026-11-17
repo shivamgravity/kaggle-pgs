@@ -5,3 +5,4 @@ private/
 output/
 *.png
 catboost_info/
+external_models/
