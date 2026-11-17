@@ -37,7 +37,29 @@ To prevent data leakage and provide consistent out-of-fold (OOF) evaluation that
 
 ## 🏆 Leaderboard & Experiments
 
-**Benchmark Model:** Cross-Paradigm Optimal Rank Blend (v1) - `0.95152` (Rank #638)
+**Benchmark Model:** Master Tri-Paradigm Blend (v1) - `0.95152` (OOF ROC-AUC: `0.95073`, PR-AUC: `0.53247`)
+
+### Velocity & Burst Interaction Augmented Triple GLM Residual Booster
+
+**Kernel:** [shivamgravity/pgs-s6e11-velocity-burst-glm-boost](https://www.kaggle.com/code/shivamgravity/pgs-s6e11-velocity-burst-glm-boost)
+
+| Version | 5-Fold OOF ROC-AUC | PR-AUC | Public LB | Notes |
+|:---:|:---:|:---:|:---:|:---|
+| v1 | *Running* | *Running* | *Running* | 10 new velocity & burst features (`spend_velocity`, `travel_speed_kmh`, `balance_drain_ratio`, `cvv_x_risk`, `fraud_risk_index`, `amount_to_cat_median`) + 1D/2D Joint TE + GLM offset for LGB, XGB, CatBoost. |
+
+### Tabular Deep ResNet with Learned Entity Embeddings (PyTorch)
+
+**Kernel:** [shivamgravity/pgs-s6e11-tabular-nn-boost](https://www.kaggle.com/code/shivamgravity/pgs-s6e11-tabular-nn-boost)
+
+| Version | 5-Fold OOF ROC-AUC | PR-AUC | Public LB | Notes |
+|:---:|:---:|:---:|:---:|:---|
+| v1 | *Running* | *Running* | *Running* | Pre-activation ResNet blocks + learned entity embeddings for `cents` (16D), `first_decimal`, `last_digit`, and categoricals. Provides orthogonal non-tree inductive bias. |
+
+### Master Tri-Paradigm Blend
+
+| Version | 5-Fold OOF ROC-AUC | PR-AUC | Public LB | Notes |
+|:---:|:---:|:---:|:---:|:---|
+| v1 | **`0.95073`** | **`0.53247`** | **`0.95152`** | 88% Tri-Gen TE Ensemble (1D + DualMargin + TripleJoint) + 12% Raw Continuous Booster. All-time highest CV & PR-AUC. |
 
 ### Cross-Paradigm Optimal Rank Blend
 

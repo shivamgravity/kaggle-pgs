@@ -1,0 +1,16 @@
+{
+  "id": "shivamgravity/pgs-s6e11-velocity-burst-glm-boost",
+  "title": "PGS S6E11 Velocity Burst GLM Boost",
+  "code_file": "model.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "dataset_sources": [],
+  "competition_sources": [
+    "playground-series-s6e11"
+  ],
+  "kernel_sources": []
+}

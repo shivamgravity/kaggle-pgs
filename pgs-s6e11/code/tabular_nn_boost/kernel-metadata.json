@@ -1,0 +1,16 @@
+{
+  "id": "shivamgravity/pgs-s6e11-tabular-nn-boost",
+  "title": "PGS S6E11 Tabular NN Boost",
+  "code_file": "model.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "dataset_sources": [],
+  "competition_sources": [
+    "playground-series-s6e11"
+  ],
+  "kernel_sources": []
+}
