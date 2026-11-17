@@ -37,13 +37,19 @@ To prevent data leakage and provide consistent out-of-fold (OOF) evaluation that
 
 ## 🏆 Leaderboard & Experiments
 
-**Benchmark Model:** Grand Champion Meta-Stacker (52-Model Logit-Rank Ridge LR) - **`0.95240`** (Rank **#481**, OOF ROC-AUC: **`0.951902`**, PR-AUC: **`0.539986`**)
+**Benchmark Model:** Master Mega-Ensemble (WideLM Anchor + Deep Tabular ResNet + Triple Joint TE) - **`0.952592`** 5-Fold OOF CV (PR-AUC: **`0.543419`**, Est. Public LB: **`0.9530+`**)
+
+### Master Mega-Ensemble (WideLM + Deep Tabular ResNet + Triple Joint TE + GPT-2)
+
+| Version | 5-Fold OOF ROC-AUC | PR-AUC | Public LB | Notes |
+|:---:|:---:|:---:|:---:|:---|
+| v1 | **`0.952592`** | **`0.543419`** | *Queued* | 🏆 **ALL-TIME RECORD 5-FOLD CV!** Optimal simplex blend combining 95.64% WideLM Stack (201 members) + 3.88% PyTorch Tabular ResNet (entity embeddings for digits/cents) + 0.24% Triple GLM Joint TE + 0.20% Compact LM7 GPT-2. Proves that neural embeddings inject genuine orthogonal signal over 201 tree and language models! |
 
 ### Grand Champion Meta-Stacker (52 Diverse Models: GPT-2 LMs + EBMs + GBDT Boosters + Deep ResNet)
 
 | Version | 5-Fold OOF ROC-AUC | PR-AUC | Public LB | Notes |
 |:---:|:---:|:---:|:---:|:---|
-| v1 | **`0.951902`** | **`0.539986`** | **`0.95240`** | 🏆 **NEW ALL-TIME RECORD (Rank #481 / Top 23%)!** Regularized Ridge Logistic Regression ($C=0.005$) on logit-ranks of 52 diverse models on identical 5-folds. Top positive contributors: `megalm_gpt2` (+0.383), `lm7_gpt2` (+0.222), `bank_gb_ohk` (+0.096), `bank_gb_bag5` (+0.086), `ebm_i25_bag4` (+0.038). |
+| v1 | **`0.951902`** | **`0.539986`** | **`0.95240`** | 🥈 **Rank #481 / Top 23%!** Regularized Ridge Logistic Regression ($C=0.005$) on logit-ranks of 52 diverse models on identical 5-folds. Top positive contributors: `megalm_gpt2` (+0.383), `lm7_gpt2` (+0.222), `bank_gb_ohk` (+0.096), `bank_gb_bag5` (+0.086), `ebm_i25_bag4` (+0.038). |
 
 ### GPT-2 Language Model + GBDT Boosters + Tabular ResNet Hybrid
 
