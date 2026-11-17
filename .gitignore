@@ -6,3 +6,5 @@ output/
 *.png
 catboost_info/
 external_models/
+lb_check/
+log/

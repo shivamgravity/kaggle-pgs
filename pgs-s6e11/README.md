@@ -37,13 +37,27 @@ To prevent data leakage and provide consistent out-of-fold (OOF) evaluation that
 
 ## 🏆 Leaderboard & Experiments
 
-**Benchmark Model:** Master Mega-Ensemble (WideLM Anchor + Deep Tabular ResNet + Triple Joint TE) - **`0.952592`** 5-Fold OOF CV (PR-AUC: **`0.543419`**, Est. Public LB: **`0.9530+`**)
+**Benchmark Model:** Grand Apex Mega-Ensemble (WideLM + GLM-Boost MLP + Deep ResNet + WideTree + LM7) - **`0.952597`** 5-Fold OOF CV (PR-AUC: **`0.543316`**, 99.62% Rank Corr to 0.95330 Public LB)
+
+### Grand Apex Mega-Ensemble (WideLM + GLM-Boost MLP + Deep Tabular ResNet + WideTree + LM7 GPT-2)
+
+| Version | 5-Fold OOF ROC-AUC | PR-AUC | Public LB | Notes |
+|:---:|:---:|:---:|:---:|:---|
+| v1 | **`0.952597`** | **`0.543316`** | *Queued Priority #1* | 👑 **ALL-TIME PEAK 5-FOLD CV!** Greedy forward selection & Nelder-Mead simplex combining WideLM (88.48%) + GLM-boost MLP w128 (4.85%) + PyTorch Tabular ResNet (3.69%) + WideTree (2.50%) + Compact LM7 GPT-2 (0.49%). Total neural diversity weight reaches 8.54%, breaking all previous CV ceilings and showing 0.9962 rank correlation to top 0.95330 LB references! |
 
 ### Master Mega-Ensemble (WideLM + Deep Tabular ResNet + Triple Joint TE + GPT-2)
 
 | Version | 5-Fold OOF ROC-AUC | PR-AUC | Public LB | Notes |
 |:---:|:---:|:---:|:---:|:---|
-| v1 | **`0.952592`** | **`0.543419`** | *Queued* | 🏆 **ALL-TIME RECORD 5-FOLD CV!** Optimal simplex blend combining 95.64% WideLM Stack (201 members) + 3.88% PyTorch Tabular ResNet (entity embeddings for digits/cents) + 0.24% Triple GLM Joint TE + 0.20% Compact LM7 GPT-2. Proves that neural embeddings inject genuine orthogonal signal over 201 tree and language models! |
+| v1 | **`0.952592`** | **`0.543419`** | *Queued Priority #2* | 🏆 **Historic 5-Fold CV.** Optimal simplex blend combining 95.64% WideLM Stack (201 members) + 3.88% PyTorch Tabular ResNet (entity embeddings for digits/cents) + 0.24% Triple GLM Joint TE + 0.20% Compact LM7 GPT-2. Proves that continuous neural embeddings inject genuine orthogonal signal over 201 tree and language models! |
+
+### Feature Tokenizer Transformer (FT-Transformer - PyTorch)
+
+**Kernel:** [shivamgravity/pgs-s6e11-tabular-transformer](https://www.kaggle.com/code/shivamgravity/pgs-s6e11-tabular-transformer)
+
+| Version | 5-Fold OOF ROC-AUC | PR-AUC | Public LB | Notes |
+|:---:|:---:|:---:|:---:|:---|
+| v1 | **`0.942509`** | **`0.484291`** | *Queued Priority #4* | Feature Tokenizer Transformer with 15 continuous feature projections + 21 learned discrete token embeddings into $d=64$ token space + 3 Pre-LN Transformer blocks + multi-head self-attention + `[CLS]` token head. Outperformed standalone Tabular ResNet by +0.00136 AUC and +0.0155 PR-AUC! Blending 60% FT-Transformer + 40% Tabular ResNet achieves **0.943585** Dual-Neural CV! |
 
 ### Grand Champion Meta-Stacker (52 Diverse Models: GPT-2 LMs + EBMs + GBDT Boosters + Deep ResNet)
 
