@@ -37,13 +37,19 @@ To prevent data leakage and provide consistent out-of-fold (OOF) evaluation that
 
 ## 🏆 Leaderboard & Experiments
 
-**Benchmark Model:** GPT-2 Language Models + GBDT Boosters + Tabular ResNet Hybrid (v1) - **`0.95218`** (Rank **#532**, OOF ROC-AUC: **`0.951631`**, PR-AUC: **`0.539003`**)
+**Benchmark Model:** Grand Champion Meta-Stacker (52-Model Logit-Rank Ridge LR) - **`0.95240`** (Rank **#481**, OOF ROC-AUC: **`0.951902`**, PR-AUC: **`0.539986`**)
+
+### Grand Champion Meta-Stacker (52 Diverse Models: GPT-2 LMs + EBMs + GBDT Boosters + Deep ResNet)
+
+| Version | 5-Fold OOF ROC-AUC | PR-AUC | Public LB | Notes |
+|:---:|:---:|:---:|:---:|:---|
+| v1 | **`0.951902`** | **`0.539986`** | **`0.95240`** | 🏆 **NEW ALL-TIME RECORD (Rank #481 / Top 23%)!** Regularized Ridge Logistic Regression ($C=0.005$) on logit-ranks of 52 diverse models on identical 5-folds. Top positive contributors: `megalm_gpt2` (+0.383), `lm7_gpt2` (+0.222), `bank_gb_ohk` (+0.096), `bank_gb_bag5` (+0.086), `ebm_i25_bag4` (+0.038). |
 
 ### GPT-2 Language Model + GBDT Boosters + Tabular ResNet Hybrid
 
 | Version | 5-Fold OOF ROC-AUC | PR-AUC | Public LB | Notes |
 |:---:|:---:|:---:|:---:|:---|
-| v1 | **`0.951631`** | **`0.539003`** | **`0.95218`** | 🏆 **NEW ALL-TIME RECORD (Rank #532)!** 49.5% GPT-2 Language Models (megalm + lm7) + 47.2% GLM-offset GBDT Boosters (Joint TE + Dual Margin + 1D) + 3.3% Tabular Deep ResNet. Broke past 0.9520 barrier! |
+| v1 | **`0.951631`** | **`0.539003`** | `0.95218` | 49.5% GPT-2 Language Models (megalm + lm7) + 47.2% GLM-offset GBDT Boosters (Joint TE + Dual Margin + 1D) + 3.3% Tabular Deep ResNet. Broke past 0.9520 barrier! |
 
 ### Velocity & Burst Interaction Augmented Triple GLM Residual Booster
 
@@ -51,7 +57,7 @@ To prevent data leakage and provide consistent out-of-fold (OOF) evaluation that
 
 | Version | 5-Fold OOF ROC-AUC | PR-AUC | Public LB | Notes |
 |:---:|:---:|:---:|:---:|:---|
-| v1 | *Running* | *Running* | *Running* | 10 new velocity & burst features (`spend_velocity`, `travel_speed_kmh`, `balance_drain_ratio`, `cvv_x_risk`, `fraud_risk_index`, `amount_to_cat_median`) + 1D/2D Joint TE + GLM offset for LGB, XGB, CatBoost. |
+| v1 | `0.950652` | `0.531390` | `0.95090` | 10 new velocity & burst features (`spend_velocity`, `travel_speed_kmh`, `balance_drain_ratio`, `cvv_x_risk`, `fraud_risk_index`, `amount_to_cat_median`) + 1D/2D Joint TE + GLM offset for LGB, XGB, CatBoost. |
 
 ### Tabular Deep ResNet with Learned Entity Embeddings (PyTorch)
 
@@ -59,7 +65,7 @@ To prevent data leakage and provide consistent out-of-fold (OOF) evaluation that
 
 | Version | 5-Fold OOF ROC-AUC | PR-AUC | Public LB | Notes |
 |:---:|:---:|:---:|:---:|:---|
-| v1 | *Running* | *Running* | *Running* | Pre-activation ResNet blocks + learned entity embeddings for `cents` (16D), `first_decimal`, `last_digit`, and categoricals. Provides orthogonal non-tree inductive bias. |
+| v1 | `0.941145` | `0.468793` | - | Pre-activation ResNet blocks + learned entity embeddings for `cents` (16D), `first_decimal`, `last_digit`, and categoricals. Provides orthogonal non-tree inductive bias (Spearman rank correlation 0.898 to trees). |
 
 ### Master Tri-Paradigm Blend
 
