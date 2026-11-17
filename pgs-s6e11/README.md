@@ -51,6 +51,22 @@ To prevent data leakage and provide consistent out-of-fold (OOF) evaluation that
 |:---:|:---:|:---:|:---:|:---|
 | v1 | **`0.952592`** | **`0.543419`** | *Queued Priority #2* | 🏆 **Historic 5-Fold CV.** Optimal simplex blend combining 95.64% WideLM Stack (201 members) + 3.88% PyTorch Tabular ResNet (entity embeddings for digits/cents) + 0.24% Triple GLM Joint TE + 0.20% Compact LM7 GPT-2. Proves that continuous neural embeddings inject genuine orthogonal signal over 201 tree and language models! |
 
+### 10-Fold Stratified Master GLM Residual Booster (74 Digit Keys + Velocity + Joint Pairs)
+
+**Kernel:** [shivamgravity/pgs-s6e11-glm-10fold-boost](https://www.kaggle.com/code/shivamgravity/pgs-s6e11-glm-10fold-boost)
+
+| Version | 10-Fold OOF ROC-AUC | PR-AUC | Public LB | Notes |
+|:---:|:---:|:---:|:---:|:---|
+| v1 | **`0.950647`** | **`0.531152`** | *Queued Priority #3* | ⚡ **10-Fold Leak-Free Residual Booster.** 100 Laplace-smoothed target-encoded multi-scale digit & 2-way joint keys (`mc_x_cents`, `amt10_x_bal10`, `mc_x_foreign`, etc.) + GLM base linear model (`0.949757` CV) + LightGBM 4-leaf booster (`0.950647` CV) + XGBoost depth-2 booster (`0.950545` CV). Executed remotely on Kaggle cloud (30 GB RAM). Adds critical 3.73% direct weight in the master mega-ensemble! |
+
+### Multi-Seed Dual-Neural Bagged Architecture (ResNet + FT-Transformer)
+
+**Kernel:** [shivamgravity/pgs-s6e11-dual-neural-multiseed](https://www.kaggle.com/code/shivamgravity/pgs-s6e11-dual-neural-multiseed)
+
+| Version | 5-Fold OOF ROC-AUC | PR-AUC | Public LB | Notes |
+|:---:|:---:|:---:|:---:|:---|
+| v1 | **`0.943441`** | **`0.482984`** | *Queued Priority #4* | 🧠 **Multi-Seed Neural Ensemble.** 6 distinct neural models: 3-seed Tabular ResNet (`0.941584` CV) + 3-seed FT-Transformer with self-attention (`0.943094` CV) trained across seeds 42, 100, 2026 with FP16 AMP. Blended dual-neural bag achieves 0.943441 OOF CV and injects crucial non-tree representations. |
+
 ### Feature Tokenizer Transformer (FT-Transformer - PyTorch)
 
 **Kernel:** [shivamgravity/pgs-s6e11-tabular-transformer](https://www.kaggle.com/code/shivamgravity/pgs-s6e11-tabular-transformer)
