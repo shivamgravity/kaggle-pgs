@@ -45,6 +45,14 @@ To prevent data leakage and provide consistent out-of-fold (OOF) evaluation that
 |:---:|:---:|:---:|:---:|:---|
 | v1 | - | - | **`0.95152`** | 85% Digit-Key TE Booster Blend + 15% Dual GLM Raw Feature Booster. Spearman corr 0.9657. Advanced to **Rank #638**! |
 
+### Triple GLM Residual Booster (LightGBM + XGBoost + CatBoost + 2-Way Joint TE)
+
+**Kernel:** [shivamgravity/pgs-s6e11-triple-glm-joint-te-boost](https://www.kaggle.com/code/shivamgravity/pgs-s6e11-triple-glm-joint-te-boost)
+
+| Version | 5-Fold OOF ROC-AUC | PR-AUC | Public LB | Notes |
+|:---:|:---:|:---:|:---:|:---|
+| v1 | **`0.95064`** | **`0.53219`** | `0.95138` | 2-Way Joint Interaction Keys + Multi-Scale Smoothing + Triple GBDT (29.5% XGB + 57.6% LGB + 13.0% CatBoost). All-time record 0.53219 OOF PR-AUC. |
+
 ### True Dual-Margin GLM Residual Booster (LightGBM + XGBoost)
 
 **Kernel:** [shivamgravity/pgs-s6e11-dual-glm-digit-te-boost](https://www.kaggle.com/code/shivamgravity/pgs-s6e11-dual-glm-digit-te-boost)
