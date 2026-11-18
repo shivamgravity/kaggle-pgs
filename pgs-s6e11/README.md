@@ -37,19 +37,19 @@ To prevent data leakage and provide consistent out-of-fold (OOF) evaluation that
 
 ## 🏆 Leaderboard & Experiments
 
-**Benchmark Model:** Grand Apex Mega-Ensemble (WideLM + GLM-Boost MLP + Deep ResNet + WideTree + LM7) - **`0.952597`** 5-Fold OOF CV (PR-AUC: **`0.543316`**, 99.62% Rank Corr to 0.95330 Public LB)
+**Benchmark Model:** Grand Apex Mega-Ensemble (WideLM + GLM-Boost MLP + Deep ResNet + WideTree + LM7) - **`0.952597`** 5-Fold OOF CV (PR-AUC: **`0.543316`**, Public LB: **`0.95292`** — Rank #398 / Top 18%)
 
 ### Grand Apex Mega-Ensemble (WideLM + GLM-Boost MLP + Deep Tabular ResNet + WideTree + LM7 GPT-2)
 
 | Version | 5-Fold OOF ROC-AUC | PR-AUC | Public LB | Notes |
 |:---:|:---:|:---:|:---:|:---|
-| v1 | **`0.952597`** | **`0.543316`** | *Queued Priority #1* | 👑 **ALL-TIME PEAK 5-FOLD CV!** Greedy forward selection & Nelder-Mead simplex combining WideLM (88.48%) + GLM-boost MLP w128 (4.85%) + PyTorch Tabular ResNet (3.69%) + WideTree (2.50%) + Compact LM7 GPT-2 (0.49%). Total neural diversity weight reaches 8.54%, breaking all previous CV ceilings and showing 0.9962 rank correlation to top 0.95330 LB references! |
+| v1 | **`0.952597`** | **`0.543316`** | **`0.95292`** | 👑 **ALL-TIME PEAK RECORD (Rank #398 / Top 18%)!** Greedy forward selection & Nelder-Mead simplex combining WideLM (88.48%) + GLM-boost MLP w128 (4.85%) + PyTorch Tabular ResNet (3.69%) + WideTree (2.50%) + Compact LM7 GPT-2 (0.49%). Total neural diversity weight reaches 8.54%, breaking all previous ceilings and propelling our team directly into the top 18%! |
 
 ### Master Mega-Ensemble (WideLM + Deep Tabular ResNet + Triple Joint TE + GPT-2)
 
 | Version | 5-Fold OOF ROC-AUC | PR-AUC | Public LB | Notes |
 |:---:|:---:|:---:|:---:|:---|
-| v1 | **`0.952592`** | **`0.543419`** | *Queued Priority #2* | 🏆 **Historic 5-Fold CV.** Optimal simplex blend combining 95.64% WideLM Stack (201 members) + 3.88% PyTorch Tabular ResNet (entity embeddings for digits/cents) + 0.24% Triple GLM Joint TE + 0.20% Compact LM7 GPT-2. Proves that continuous neural embeddings inject genuine orthogonal signal over 201 tree and language models! |
+| v1 | **`0.952592`** | **`0.543419`** | **`0.95290`** | 🏆 **Historic 5-Fold Performance.** Optimal simplex blend combining 95.64% WideLM Stack (201 members) + 3.88% PyTorch Tabular ResNet (entity embeddings for digits/cents) + 0.24% Triple GLM Joint TE + 0.20% Compact LM7 GPT-2. Proves that continuous neural embeddings inject genuine orthogonal signal over 201 tree and language models! |
 
 ### 10-Fold Stratified Master GLM Residual Booster (74 Digit Keys + Velocity + Joint Pairs)
 
@@ -57,7 +57,7 @@ To prevent data leakage and provide consistent out-of-fold (OOF) evaluation that
 
 | Version | 10-Fold OOF ROC-AUC | PR-AUC | Public LB | Notes |
 |:---:|:---:|:---:|:---:|:---|
-| v1 | **`0.950647`** | **`0.531152`** | *Queued Priority #3* | ⚡ **10-Fold Leak-Free Residual Booster.** 100 Laplace-smoothed target-encoded multi-scale digit & 2-way joint keys (`mc_x_cents`, `amt10_x_bal10`, `mc_x_foreign`, etc.) + GLM base linear model (`0.949757` CV) + LightGBM 4-leaf booster (`0.950647` CV) + XGBoost depth-2 booster (`0.950545` CV). Executed remotely on Kaggle cloud (30 GB RAM). Adds critical 3.73% direct weight in the master mega-ensemble! |
+| v1 | **`0.950647`** | **`0.531152`** | **`0.95034`** | ⚡ **10-Fold Leak-Free Residual Booster.** 100 Laplace-smoothed target-encoded multi-scale digit & 2-way joint keys (`mc_x_cents`, `amt10_x_bal10`, `mc_x_foreign`, etc.) + GLM base linear model (`0.949757` CV) + LightGBM 4-leaf booster (`0.950647` CV) + XGBoost depth-2 booster (`0.950545` CV). Executed remotely on Kaggle cloud (30 GB RAM). Adds critical 3.73% direct weight in the master mega-ensemble! |
 
 ### Multi-Seed Dual-Neural Bagged Architecture (ResNet + FT-Transformer)
 
@@ -65,7 +65,7 @@ To prevent data leakage and provide consistent out-of-fold (OOF) evaluation that
 
 | Version | 5-Fold OOF ROC-AUC | PR-AUC | Public LB | Notes |
 |:---:|:---:|:---:|:---:|:---|
-| v1 | **`0.943441`** | **`0.482984`** | *Queued Priority #4* | 🧠 **Multi-Seed Neural Ensemble.** 6 distinct neural models: 3-seed Tabular ResNet (`0.941584` CV) + 3-seed FT-Transformer with self-attention (`0.943094` CV) trained across seeds 42, 100, 2026 with FP16 AMP. Blended dual-neural bag achieves 0.943441 OOF CV and injects crucial non-tree representations. |
+| v1 | **`0.943441`** | **`0.482984`** | **`0.94353`** | 🧠 **Multi-Seed Neural Ensemble.** 6 distinct neural models: 3-seed Tabular ResNet (`0.941584` CV) + 3-seed FT-Transformer with self-attention (`0.943094` CV) trained across seeds 42, 100, 2026 with FP16 AMP. Generalizes well on the public test set (`0.94353` LB) and injects crucial non-tree representations. |
 
 ### Feature Tokenizer Transformer (FT-Transformer - PyTorch)
 
