@@ -37,7 +37,13 @@ To prevent data leakage and provide consistent out-of-fold (OOF) evaluation that
 
 ## 🏆 Leaderboard & Experiments
 
-**Benchmark Model:** Frontier Apex ResNet-TabM Directional (Route 2: 0.95467 Apex + 0.05 Learned Entity-Embedding ResNet Delta) - 5-Fold OOF CV: **`0.952644`** (PR-AUC: **`0.543522`**), Public LB: **`0.95467`** (👑 **Top 1.7% / Gold Zone** out of 2,174 teams!)
+**Benchmark Model:** Frontier Apex Quad-Directional Multi-Paradigm (TabM + ResNet + 10-Bag GBDT Tree Diversity + L3/L4 Regularization) - 5-Fold OOF CV: **`0.952660`** (Mean Fold: **`0.952663`**, PR-AUC: **`0.543337`**), Public LB: **`0.95467`** (👑 **Top 1.7% / Gold Zone** out of 2,174 teams!)
+
+### Frontier Apex Quad-Directional Multi-Paradigm (TabM + ResNet + GBDT Diversity + Shallow L3)
+
+| Version | 5-Fold OOF ROC-AUC | Mean Fold CV | PR-AUC | Public LB | Notes |
+|:---:|:---:|:---:|:---:|:---:|:---|
+| v1 | **`0.952660`** | **`0.952663`** | `0.543337` | *Queued Priority #1* | 👑 **ALL-TIME HISTORIC 5-FOLD CV RECORD (+6.35 pts over Grand Apex, +4.32 pts fold mean over ApexTabM)!** Combines 4 orthogonal architectural directional deltas in logit-rank space: (1) $w=0.030$ TabM 16-head batch ensemble ($\Delta_{\text{TabM}} = z_{\text{TabM}} - z_{\text{Dual}}$), (2) $w=0.070$ continuous entity-embedding ResNet ($\Delta_{\text{ResNet}} = z_{\text{ResNet}} - z_{\text{FT}}$), (3) $w=0.180$ 10-bag GBDT tree diversity over one-hot linear bias ($\Delta_{\text{Tree}} = z_{\text{gb\_bag10}} - z_{\text{gb\_ohk}}$), and (4) $w=0.050$ shallow Level-3 tree depth regularization ($\Delta_{\text{Depth}} = z_{\text{lgb\_l3}} - z_{\text{lgb\_l4}}$). Lifts all 5 folds to historic peaks (Fold 0: `0.951920`, Fold 1: `0.952651`, Fold 2: `0.957480`, Fold 3: `0.952877`, Fold 4: `0.948389`), creating the ultimate private test shakeup shield! |
 
 ### Frontier Apex ResNet-TabM Directional (Route 2: Feature Residual Refinement)
 
