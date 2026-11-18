@@ -1,322 +1,304 @@
 #!/usr/bin/env python3
 """
-Build Kaggle Notebook for TabM GPU Training (5-Fold Stratified CV)
-Uses pytabkit TabM_D_Classifier on GPU with domain-engineered features:
-Benford first digits, decimal extraction, interaction target encoding, and quantile binning.
+Build Robust Kaggle Notebook for TabM Deep Ensemble (5-Fold Stratified CV)
+Generates model.ipynb using nbformat with dynamic dataset discovery and clean GPU execution.
 """
 
-import json
 from pathlib import Path
+import nbformat as nbf
 
-def create_notebook():
-    cells = []
-
-    # Cell 1: Install pytabkit
-    cells.append({
-        "cell_type": "code",
-        "execution_count": None,
-        "metadata": {},
-        "outputs": [],
-        "source": [
-            "%%time\n",
-            "!pip install -q pytabkit\n"
-        ]
-    })
-
-    # Cell 2: Imports & Seeds
-    cells.append({
-        "cell_type": "code",
-        "execution_count": None,
-        "metadata": {},
-        "outputs": [],
-        "source": [
-            "import os, random, time, warnings\n",
-            "from importlib.metadata import version\n",
-            "import numpy as np, pandas as pd\n",
-            "import torch\n",
-            "from pytabkit import TabM_D_Classifier\n",
-            "from sklearn.metrics import roc_auc_score, average_precision_score\n",
-            "from sklearn.model_selection import StratifiedKFold\n",
-            "from sklearn.preprocessing import KBinsDiscretizer, TargetEncoder\n",
-            "from scipy.stats import rankdata\n",
-            "\n",
-            "warnings.filterwarnings('ignore')\n",
-            "print('PyTorch version: ', torch.__version__)\n",
-            "print('CUDA available:  ', torch.cuda.is_available())\n",
-            "if torch.cuda.is_available():\n",
-            "    print('GPU device:      ', torch.cuda.get_device_name(0))\n",
-            "print('PyTabKit version:', version('pytabkit'))\n",
-            "\n",
-            "def seed_everything(seed: int = 42):\n",
-            "    random.seed(seed)\n",
-            "    np.random.seed(seed)\n",
-            "    torch.manual_seed(seed)\n",
-            "    if torch.cuda.is_available():\n",
-            "        torch.cuda.manual_seed_all(seed)\n",
-            "\n",
-            "seed_everything(42)\n"
-        ]
-    })
-
-    # Cell 3: Load Data
-    cells.append({
-        "cell_type": "code",
-        "execution_count": None,
-        "metadata": {},
-        "outputs": [],
-        "source": [
-            "%%time\n",
-            "train_path = '/kaggle/input/playground-series-s6e11/train.csv'\n",
-            "test_path = '/kaggle/input/playground-series-s6e11/test.csv'\n",
-            "\n",
-            "train = pd.read_csv(train_path)\n",
-            "test = pd.read_csv(test_path)\n",
-            "print(f'Train shape: {train.shape}, Test shape: {test.shape}')\n",
-            "\n",
-            "ID = 'id'\n",
-            "TARGET = 'is_fraud'\n",
-            "\n",
-            "train_id = train[ID]\n",
-            "test_id = test[ID]\n",
-            "y = train[TARGET].values.astype(int)\n",
-            "\n",
-            "X = train.drop(columns=[ID, TARGET])\n",
-            "X_test = test.drop(columns=[ID])\n",
-            "del train, test\n",
-            "\n",
-            "print(f'Fraud rate: {y.mean():.4%}')\n"
-        ]
-    })
-
-    # Cell 4: Feature Engineering
-    cells.append({
-        "cell_type": "code",
-        "execution_count": None,
-        "metadata": {},
-        "outputs": [],
-        "source": [
-            "%%time\n",
-            "cat_cols = X.select_dtypes(include=['object', 'bool']).columns.tolist()\n",
-            "num_cols = X.select_dtypes(exclude=['object', 'bool']).columns.tolist()\n",
-            "print(f'Initial cat_cols: {len(cat_cols)}, num_cols: {len(num_cols)}')\n",
-            "\n",
-            "important_combos = [\n",
-            "    ('merchant_category', 'card_type', 'txn_count_last_24h'),\n",
-            "    ('merchant_category', 'customer_age'),\n",
-            "]\n",
-            "\n",
-            "category_map = {}\n",
-            "\n",
-            "def feature_engineering(df, fit=False):\n",
-            "    # 1. Decimal / Fractional extraction\n",
-            "    for col in ['amount_usd', 'hours_since_last_txn', 'velocity_score', 'distance_from_home_km']:\n",
-            "        if col in df.columns:\n",
-            "            df[f'_{col}_decimal'] = (df[col] % 1).round(2).astype('float32')\n",
-            "\n",
-            "    # 2. Benford First Digit of amount\n",
-            "    if 'amount_usd' in df.columns:\n",
-            "        df['_amount_first_digit'] = df['amount_usd'].astype(str).str.extract(r'([1-9])')[0].fillna('0').astype(int).astype('category')\n",
-            "        df['_is_round_dollar'] = ((df['amount_usd'] % 1).round(2) == 0).astype(int).astype('category')\n",
-            "        df['_is_99_cents'] = ((df['amount_usd'] % 1).round(2) == 0.99).astype(int).astype('category')\n",
-            "\n",
-            "    # 3. Discretize numerical distributions into categories\n",
-            "    for col in num_cols + ['_amount_usd_decimal', '_hours_since_last_txn_decimal', '_velocity_score_decimal', '_distance_from_home_km_decimal']:\n",
-            "        if col in df.columns:\n",
-            "            cat_name = f'{col}_cat_' if col in num_cols else f'{col[1:]}_cat_'\n",
-            "            values = np.floor(df[col]) if col in num_cols else df[col]\n",
-            "            if fit:\n",
-            "                codes, uniques = values.factorize()\n",
-            "                category_map[col] = uniques\n",
-            "            else:\n",
-            "                uniques = category_map[col]\n",
-            "                code_map = {cat: i for i, cat in enumerate(uniques)}\n",
-            "                codes = values.map(code_map).fillna(-1).astype('int32')\n",
-            "            df[cat_name] = codes\n",
-            "            df[cat_name] = df[cat_name].astype('category')\n",
-            "\n",
-            "    # 4. Quantile Binning\n",
-            "    bin_config = {'merchant_risk_score': [7], 'hours_since_last_txn': [500, 1000]}\n",
-            "    for col, bins_list in bin_config.items():\n",
-            "        if col in df.columns:\n",
-            "            for n_bins in bins_list:\n",
-            "                bin_name = f'{col}_{n_bins}_quantile_bin_'\n",
-            "                if fit:\n",
-            "                    kb = KBinsDiscretizer(n_bins=n_bins, encode='ordinal', strategy='quantile', subsample=None)\n",
-            "                    binned = kb.fit_transform(df[[col]]).ravel().astype('int32')\n",
-            "                    category_map[bin_name] = kb\n",
-            "                else:\n",
-            "                    kb = category_map[bin_name]\n",
-            "                    binned = kb.transform(df[[col]]).ravel().astype('int32')\n",
-            "                df[bin_name] = binned\n",
-            "                df[bin_name] = df[bin_name].astype('category')\n",
-            "\n",
-            "    # 5. High-order interaction categories\n",
-            "    combo_names = []\n",
-            "    for cols in important_combos:\n",
-            "        combo_name = '_'.join(cols) + '_'\n",
-            "        combo_names.append(combo_name)\n",
-            "        combo_series = df[cols[0]].astype(str)\n",
-            "        for col in cols[1:]: \n",
-            "            combo_series = combo_series + '_' + df[col].astype(str)\n",
-            "        if fit:\n",
-            "            codes, uniques = pd.factorize(combo_series, sort=False)\n",
-            "            category_map[combo_name] = uniques\n",
-            "        else:\n",
-            "            uniques = category_map[combo_name]\n",
-            "            code_map = {cat: i for i, cat in enumerate(uniques)}\n",
-            "            codes = combo_series.map(code_map).fillna(-1).astype('int32')\n",
-            "        df[combo_name] = codes\n",
-            "        df[combo_name] = df[combo_name].astype('category')\n",
-            "\n",
-            "    new_cat_cols = [col for col in df.columns if col.endswith('_')]\n",
-            "    new_num_cols = [col for col in df.columns if col.startswith('_')]\n",
-            "    return df, new_cat_cols, new_num_cols, combo_names\n",
-            "\n",
-            "X, new_cat_cols, new_num_cols, combo_names = feature_engineering(X, fit=True)\n",
-            "X_test, _, _, _ = feature_engineering(X_test, fit=False)\n",
-            "cat_cols += new_cat_cols\n",
-            "num_cols += new_num_cols\n",
-            "print(f'Feature engineering complete: X shape={X.shape}, X_test={X_test.shape}')\n"
-        ]
-    })
-
-    # Cell 5: Stratified 5-Fold Training Loop
-    cells.append({
-        "cell_type": "code",
-        "execution_count": None,
-        "metadata": {},
-        "outputs": [],
-        "source": [
-            "%%time\n",
-            "FOLDS = 5\n",
-            "SEED = 42\n",
-            "\n",
-            "skf = StratifiedKFold(n_splits=FOLDS, shuffle=True, random_state=SEED)\n",
-            "oof_preds = np.zeros(len(X), dtype=np.float64)\n",
-            "test_preds = np.zeros(len(X_test), dtype=np.float64)\n",
-            "\n",
-            "tabm_params = {\n",
-            "    'device': 'cuda' if torch.cuda.is_available() else 'cpu',\n",
-            "    'random_state': SEED,\n",
-            "    'val_metric_name': '1-auc_ovr',\n",
-            "    'tabm_k': 16,\n",
-            "    'batch_size': 512,\n",
-            "    'lr': 0.002,\n",
-            "    'weight_decay': 0.01,\n",
-            "    'n_epochs': 12,\n",
-            "    'patience': 4,\n",
-            "    'allow_amp': True,\n",
-            "    'verbosity': 2,\n",
-            "}\n",
-            "\n",
-            "te_cols = combo_names + ['hours_since_last_txn']\n",
-            "\n",
-            "for fold, (tr_idx, val_idx) in enumerate(skf.split(X, y), 1):\n",
-            "    t0 = time.time()\n",
-            "    print('=' * 60)\n",
-            "    print(f'>>> Fold {fold}/{FOLDS} TabM Training')\n",
-            "    print('=' * 60)\n",
-            "\n",
-            "    X_tr = X.iloc[tr_idx].copy()\n",
-            "    X_val = X.iloc[val_idx].copy()\n",
-            "    y_tr = y[tr_idx]\n",
-            "    y_val = y[val_idx]\n",
-            "    X_tst = X_test.copy()\n",
-            "\n",
-            "    # Out-of-fold Target Encoding on key interactions\n",
-            "    TE = TargetEncoder(cv=FOLDS, smooth='auto', shuffle=True, random_state=SEED + fold)\n",
-            "    tr_enc = TE.fit_transform(X_tr[te_cols], y_tr)\n",
-            "    val_enc = TE.transform(X_val[te_cols])\n",
-            "    tst_enc = TE.transform(X_tst[te_cols])\n",
-            "\n",
-            "    te_names = [f'_{col}_TE' for col in te_cols]\n",
-            "    X_tr[te_names] = tr_enc.astype('float32')\n",
-            "    X_val[te_names] = val_enc.astype('float32')\n",
-            "    X_tst[te_names] = tst_enc.astype('float32')\n",
-            "\n",
-            "    print(f'Train features: {X_tr.shape[1]} columns')\n",
-            "\n",
-            "    # Instantiate and fit TabM\n",
-            "    fold_params = dict(tabm_params)\n",
-            "    fold_params['random_state'] = SEED + fold\n",
-            "\n",
-            "    model = TabM_D_Classifier(**fold_params)\n",
-            "    model.fit(X_tr, y_tr, X_val, y_val)\n",
-            "\n",
-            "    val_preds = model.predict_proba(X_val)[:, 1]\n",
-            "    fold_test_preds = model.predict_proba(X_tst)[:, 1]\n",
-            "\n",
-            "    oof_preds[val_idx] = val_preds\n",
-            "    test_preds += fold_test_preds / FOLDS\n",
-            "\n",
-            "    fold_auc = roc_auc_score(y_val, val_preds)\n",
-            "    fold_prauc = average_precision_score(y_val, val_preds)\n",
-            "    elapsed = time.time() - t0\n",
-            "    print(f'Fold {fold} finished in {elapsed:.1f}s | ROC-AUC: {fold_auc:.6f} | PR-AUC: {fold_prauc:.6f}')\n",
-            "\n",
-            "    if torch.cuda.is_available():\n",
-            "        torch.cuda.empty_cache()\n"
-        ]
-    })
-
-    # Cell 6: Overall Metrics & Export
-    cells.append({
-        "cell_type": "code",
-        "execution_count": None,
-        "metadata": {},
-        "outputs": [],
-        "source": [
-            "# Compute Overall Performance & Export\n",
-            "overall_auc = roc_auc_score(y, oof_preds)\n",
-            "overall_prauc = average_precision_score(y, oof_preds)\n",
-            "\n",
-            "print('=' * 60)\n",
-            "print(f'>>> Overall TabM 5-Fold OOF ROC-AUC: {overall_auc:.6f}')\n",
-            "print(f'>>> Overall TabM 5-Fold OOF PR-AUC:  {overall_prauc:.6f}')\n",
-            "print('=' * 60)\n",
-            "\n",
-            "np.save('oof_tabm.npy', oof_preds.astype(np.float32))\n",
-            "np.save('test_tabm.npy', test_preds.astype(np.float32))\n",
-            "\n",
-            "# Generate rank-scaled submission\n",
-            "r_test = (rankdata(test_preds) - 0.5) / len(test_preds)\n",
-            "sub = pd.DataFrame({'id': test_id, 'is_fraud': r_test})\n",
-            "sub.to_csv('tabm_submission.csv', index=False)\n",
-            "\n",
-            "print('Saved files:')\n",
-            "print('  oof_tabm.npy:       ', os.path.getsize('oof_tabm.npy') / (1024 * 1024), 'MB')\n",
-            "print('  test_tabm.npy:      ', os.path.getsize('test_tabm.npy') / (1024 * 1024), 'MB')\n",
-            "print('  tabm_submission.csv:', os.path.getsize('tabm_submission.csv') / (1024 * 1024), 'MB')\n",
-            "print('Done!')\n"
-        ]
-    })
-
-    notebook = {
-        "cells": cells,
-        "metadata": {
-            "kernelspec": {
-                "display_name": "Python 3",
-                "language": "python",
-                "name": "python3"
-            },
-            "language_info": {
-                "codemirror_mode": {"name": "ipython", "version": 3},
-                "file_extension": ".py",
-                "mimetype": "text/x-python",
-                "name": "python",
-                "nbconvert_exporter": "python",
-                "pygments_lexer": "ipython3",
-                "version": "3.10.12"
-            }
+def build_tabm_notebook():
+    nb = nbf.v4.new_notebook()
+    nb.metadata = {
+        "kernelspec": {
+            "display_name": "Python 3",
+            "language": "python",
+            "name": "python3"
         },
-        "nbformat": 4,
-        "nbformat_minor": 5
+        "language_info": {
+            "name": "python",
+            "version": "3.10.12"
+        }
     }
 
+    cells = []
+
+    # Cell 0: Install Dependencies
+    cells.append(nbf.v4.new_code_cell("""# Step 0: Install PyTabKit
+import subprocess, sys
+subprocess.check_call([sys.executable, "-m", "pip", "install", "-q", "pytabkit"])
+print("PyTabKit installed successfully.")
+"""))
+
+    # Cell 1: Environment & Setup
+    cells.append(nbf.v4.new_code_cell("""# Step 1: Imports and Device Setup
+import os
+import gc
+import glob
+import time
+import random
+import warnings
+from pathlib import Path
+from importlib.metadata import version
+
+import numpy as np
+import pandas as pd
+from scipy.stats import rankdata
+from sklearn.metrics import roc_auc_score, average_precision_score
+from sklearn.model_selection import StratifiedKFold
+from sklearn.preprocessing import KBinsDiscretizer, TargetEncoder
+
+import torch
+from pytabkit import TabM_D_Classifier
+
+warnings.filterwarnings('ignore')
+
+print("PyTorch version: ", torch.__version__)
+print("CUDA available:  ", torch.cuda.is_available())
+if torch.cuda.is_available():
+    print("GPU device:      ", torch.cuda.get_device_name(0))
+    print("Device count:    ", torch.cuda.device_count())
+print("PyTabKit version:", version("pytabkit"))
+
+def seed_everything(seed=42):
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(seed)
+
+seed_everything(42)
+"""))
+
+    # Cell 2: Robust Data Loading
+    cells.append(nbf.v4.new_code_cell("""# Step 2: Dynamic Dataset Discovery & Loading
+train_candidates = (
+    glob.glob('/kaggle/input/**/train.csv', recursive=True)
+    + glob.glob('**/train.csv', recursive=True)
+    + glob.glob('../../dataset/train.csv')
+    + glob.glob('pgs-s6e11/dataset/train.csv')
+)
+
+if not train_candidates:
+    raise FileNotFoundError("Could not find train.csv in any candidate paths.")
+
+TRAIN_PATH = Path(train_candidates[0])
+DATA_DIR = TRAIN_PATH.parent
+TEST_PATH = DATA_DIR / "test.csv"
+SUB_PATH = DATA_DIR / "sample_submission.csv"
+
+print(f"Loading data from: {DATA_DIR}")
+t0 = time.time()
+train_df = pd.read_csv(TRAIN_PATH)
+test_df = pd.read_csv(TEST_PATH)
+sample_sub = pd.read_csv(SUB_PATH)
+
+print(f"Loaded train: {train_df.shape}, test: {test_df.shape} in {time.time() - t0:.2f}s")
+
+ID = 'id'
+TARGET = 'is_fraud'
+
+train_id = train_df[ID].values
+test_id = test_df[ID].values
+y = train_df[TARGET].values.astype(int)
+
+X = train_df.drop(columns=[ID, TARGET]).copy()
+X_test = test_df.drop(columns=[ID]).copy()
+del train_df, test_df
+gc.collect()
+
+print(f"Fraud rate: {y.mean():.4%} ({y.sum():,} positive frauds out of {len(y):,} rows)")
+"""))
+
+    # Cell 3: Domain Feature Engineering
+    cells.append(nbf.v4.new_code_cell("""# Step 3: Domain Feature Engineering
+t0 = time.time()
+
+cat_cols = X.select_dtypes(include=['object', 'bool']).columns.tolist()
+num_cols = X.select_dtypes(exclude=['object', 'bool']).columns.tolist()
+print(f"Base columns: {len(cat_cols)} categorical, {len(num_cols)} numerical")
+
+important_combos = [
+    ('merchant_category', 'card_type', 'txn_count_last_24h'),
+    ('merchant_category', 'customer_age'),
+]
+
+category_map = {}
+
+def feature_engineering(df, fit=False):
+    # 1. Decimal / Fractional parts
+    for col in ['amount_usd', 'hours_since_last_txn', 'velocity_score', 'distance_from_home_km']:
+        if col in df.columns:
+            df[f'_{col}_decimal'] = (df[col] % 1).round(2).astype('float32')
+
+    # 2. Benford First Digit of amount & Cent Indicators
+    if 'amount_usd' in df.columns:
+        df['_amount_first_digit'] = df['amount_usd'].astype(str).str.extract(r'([1-9])')[0].fillna('0').astype(int).astype('category')
+        df['_is_round_dollar'] = ((df['amount_usd'] % 1).round(2) == 0).astype(int).astype('category')
+        df['_is_99_cents'] = ((df['amount_usd'] % 1).round(2) == 0.99).astype(int).astype('category')
+
+    # 3. Discretize continuous distributions into integer category codes
+    for col in num_cols + ['_amount_usd_decimal', '_hours_since_last_txn_decimal', '_velocity_score_decimal', '_distance_from_home_km_decimal']:
+        if col in df.columns:
+            cat_name = f'{col}_cat_' if col in num_cols else f'{col[1:]}_cat_'
+            values = np.floor(df[col]) if col in num_cols else df[col]
+            if fit:
+                codes, uniques = values.factorize()
+                category_map[col] = uniques
+            else:
+                uniques = category_map[col]
+                code_map = {cat: i for i, cat in enumerate(uniques)}
+                codes = values.map(code_map).fillna(-1).astype('int32')
+            df[cat_name] = codes
+            df[cat_name] = df[cat_name].astype('category')
+
+    # 4. Quantile Bins
+    bin_config = {'merchant_risk_score': [7], 'hours_since_last_txn': [500, 1000]}
+    for col, bins_list in bin_config.items():
+        if col in df.columns:
+            for n_bins in bins_list:
+                bin_name = f'{col}_{n_bins}_quantile_bin_'
+                if fit:
+                    kb = KBinsDiscretizer(n_bins=n_bins, encode='ordinal', strategy='quantile', subsample=None)
+                    binned = kb.fit_transform(df[[col]]).ravel().astype('int32')
+                    category_map[bin_name] = kb
+                else:
+                    kb = category_map[bin_name]
+                    binned = kb.transform(df[[col]]).ravel().astype('int32')
+                df[bin_name] = binned
+                df[bin_name] = df[bin_name].astype('category')
+
+    # 5. High-order interaction categories
+    combo_names = []
+    for cols in important_combos:
+        combo_name = '_'.join(cols) + '_'
+        combo_names.append(combo_name)
+        combo_series = df[cols[0]].astype(str)
+        for col in cols[1:]: 
+            combo_series = combo_series + '_' + df[col].astype(str)
+        if fit:
+            codes, uniques = pd.factorize(combo_series, sort=False)
+            category_map[combo_name] = uniques
+        else:
+            uniques = category_map[combo_name]
+            code_map = {cat: i for i, cat in enumerate(uniques)}
+            codes = combo_series.map(code_map).fillna(-1).astype('int32')
+        df[combo_name] = codes
+        df[combo_name] = df[combo_name].astype('category')
+
+    new_cat_cols = [col for col in df.columns if col.endswith('_')]
+    new_num_cols = [col for col in df.columns if col.startswith('_')]
+    return df, new_cat_cols, new_num_cols, combo_names
+
+X, new_cat_cols, new_num_cols, combo_names = feature_engineering(X, fit=True)
+X_test, _, _, _ = feature_engineering(X_test, fit=False)
+cat_cols += new_cat_cols
+num_cols += new_num_cols
+print(f"Feature engineering completed in {time.time() - t0:.2f}s: X shape={X.shape}, X_test={X_test.shape}")
+"""))
+
+    # Cell 4: 5-Fold Stratified TabM Training Loop
+    cells.append(nbf.v4.new_code_cell("""# Step 4: 5-Fold Stratified TabM Training Loop
+FOLDS = 5
+SEED = 42
+
+skf = StratifiedKFold(n_splits=FOLDS, shuffle=True, random_state=SEED)
+oof_preds = np.zeros(len(X), dtype=np.float64)
+test_preds = np.zeros(len(X_test), dtype=np.float64)
+
+tabm_params = {
+    'device': 'cuda' if torch.cuda.is_available() else 'cpu',
+    'random_state': SEED,
+    'val_metric_name': 'cross_entropy',
+    'tabm_k': 16,
+    'batch_size': 1024,
+    'lr': 0.002,
+    'weight_decay': 0.01,
+    'n_epochs': 15,
+    'patience': 5,
+    'allow_amp': True,
+    'verbosity': 1,
+}
+
+te_cols = combo_names + ['hours_since_last_txn']
+
+for fold, (tr_idx, val_idx) in enumerate(skf.split(X, y), 1):
+    fold_t0 = time.time()
+    print("=" * 60)
+    print(f">>> Fold {fold}/{FOLDS} TabM Deep Ensemble Training")
+    print("=" * 60)
+
+    X_tr = X.iloc[tr_idx].copy()
+    X_val = X.iloc[val_idx].copy()
+    y_tr = y[tr_idx]
+    y_val = y[val_idx]
+    X_tst = X_test.copy()
+
+    # Out-of-fold Target Encoding on key interactions
+    TE = TargetEncoder(cv=FOLDS, smooth='auto', shuffle=True, random_state=SEED + fold)
+    tr_enc = TE.fit_transform(X_tr[te_cols], y_tr)
+    val_enc = TE.transform(X_val[te_cols])
+    tst_enc = TE.transform(X_tst[te_cols])
+
+    te_names = [f'_{col}_TE' for col in te_cols]
+    X_tr[te_names] = tr_enc.astype('float32')
+    X_val[te_names] = val_enc.astype('float32')
+    X_tst[te_names] = tst_enc.astype('float32')
+
+    print(f"Features for training: {X_tr.shape[1]} columns")
+
+    fold_params = dict(tabm_params)
+    fold_params['random_state'] = SEED + fold
+
+    model = TabM_D_Classifier(**fold_params)
+    model.fit(X_tr, y_tr, X_val, y_val)
+
+    val_preds = model.predict_proba(X_val)[:, 1]
+    fold_test_preds = model.predict_proba(X_tst)[:, 1]
+
+    oof_preds[val_idx] = val_preds
+    test_preds += fold_test_preds / FOLDS
+
+    fold_auc = roc_auc_score(y_val, val_preds)
+    fold_prauc = average_precision_score(y_val, val_preds)
+    elapsed = time.time() - fold_t0
+    print(f"Fold {fold} finished in {elapsed:.1f}s | ROC-AUC: {fold_auc:.6f} | PR-AUC: {fold_prauc:.6f}")
+
+    del X_tr, X_val, X_tst, y_tr, y_val, model
+    gc.collect()
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
+"""))
+
+    # Cell 5: Evaluation & Export
+    cells.append(nbf.v4.new_code_cell("""# Step 5: Overall Evaluation & Export
+overall_auc = roc_auc_score(y, oof_preds)
+overall_prauc = average_precision_score(y, oof_preds)
+
+print("=" * 60)
+print(f">>> Overall TabM 5-Fold OOF ROC-AUC: {overall_auc:.6f}")
+print(f">>> Overall TabM 5-Fold OOF PR-AUC:  {overall_prauc:.6f}")
+print("=" * 60)
+
+np.save('oof_tabm.npy', oof_preds.astype(np.float32))
+np.save('test_tabm.npy', test_preds.astype(np.float32))
+
+r_test = (rankdata(test_preds) - 0.5) / len(test_preds)
+sub = pd.DataFrame({'id': test_id, 'is_fraud': r_test})
+sub.to_csv('tabm_submission.csv', index=False)
+
+print("Exported files:")
+print(f"  oof_tabm.npy:        {os.path.getsize('oof_tabm.npy') / (1024*1024):.2f} MB")
+print(f"  test_tabm.npy:       {os.path.getsize('test_tabm.npy') / (1024*1024):.2f} MB")
+print(f"  tabm_submission.csv: {os.path.getsize('tabm_submission.csv') / (1024*1024):.2f} MB")
+print("All tasks finished successfully.")
+"""))
+
+    nb.cells = cells
     out_file = Path(__file__).resolve().parent / "model.ipynb"
     with open(out_file, "w") as f:
-        json.dump(notebook, f, indent=2)
-    print(f"Generated notebook at: {out_file}")
+        nbf.write(nb, f)
+    print(f"Successfully generated notebook with {len(cells)} cells at: {out_file}")
 
 if __name__ == "__main__":
-    create_notebook()
+    build_tabm_notebook()
