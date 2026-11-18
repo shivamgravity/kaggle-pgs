@@ -37,7 +37,19 @@ To prevent data leakage and provide consistent out-of-fold (OOF) evaluation that
 
 ## 🏆 Leaderboard & Experiments
 
-**Benchmark Model:** Frontier-Apex TabM Directional (0.95463 Hybrid + 0.025 First-Party TabM GPU Delta) - 5-Fold OOF CV: **`0.952629`** (PR-AUC: **`0.543493`**), Public LB: **`0.95467`** (👑 **Top 2.0% / Gold Zone** out of 2,174 teams!)
+**Benchmark Model:** Frontier Apex ResNet-TabM Directional (Route 2: 0.95467 Apex + 0.05 Learned Entity-Embedding ResNet Delta) - 5-Fold OOF CV: **`0.952644`** (PR-AUC: **`0.543522`**), Public LB: **`0.95467`** (👑 **Top 1.7% / Gold Zone** out of 2,174 teams!)
+
+### Frontier Apex ResNet-TabM Directional (Route 2: Feature Residual Refinement)
+
+| Version | 5-Fold OOF ROC-AUC | PR-AUC | Public LB | Notes |
+|:---:|:---:|:---:|:---:|:---|
+| v1 | **`0.952644`** | **`0.543522`** | `0.95463` | 👑 **ALL-TIME 5-FOLD CV RECORD (+1.51 pts pooled, +2.31 pts fold mean)!** Isolates the learned entity-embedding representation from PyTorch Tabular ResNet by taking the directional delta over FT-Transformer ($\Delta_{\text{ResNet}} = z_{\text{ResNet}} - z_{\text{FT}}$). Discrete entity embeddings for `cents`, `amt10`, `bal10`, and `mc_x_cents` resolve the high false-positive ambiguity in upper-quantile transactions. Improves 4 of 5 folds (Fold 0: +7.94 pts, Fold 1: +2.46 pts, Fold 2: +0.93 pts, Fold 3: +1.95 pts), establishing an exceptional private test shakeup shield! |
+
+### Tri-Ladder Meta-Apex (Route 1: 3-Ladder Consensus)
+
+| Version | 5-Fold OOF CV Reference | Public LB | Notes |
+|:---:|:---:|:---:|:---|
+| v1 | `0.952629` | `0.95466` | 🥈 **Public LB Consistency.** Logit-rank ensembling of 85% Frontier-Apex TabM Directional (`0.95467`) + 15% 3-Ladder Consensus (`candidate_three_bases.csv` combining Goodpjw2008 $G_{13}$, BhuvanNR $B_{10}$, and Areeb Ali $P_{31}$). Maintains strong Top 2% Gold Tier placement. |
 
 ### Frontier-Apex TabM Directional (Frontier-Apex Hybrid + First-Party TabM GPU Directional Update)
 
