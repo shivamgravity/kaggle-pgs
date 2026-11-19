@@ -1,0 +1,14 @@
+{
+  "id": "shivamgravity/pgs-s6e11-tabm-pwl-v2",
+  "title": "pgs-s6e11-tabm-pwl-v2",
+  "code_file": "model.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_gpu": true,
+  "enable_gpu": true,
+  "enable_internet": true,
+  "dataset_sources": [],
+  "competition_sources": [
+    "playground-series-s6e11"
+  ]
+}
