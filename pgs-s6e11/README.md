@@ -43,13 +43,13 @@ To prevent data leakage and provide consistent out-of-fold (OOF) evaluation that
 
 | Version | 5-Fold OOF ROC-AUC | Mean Fold CV | PR-AUC | Public LB | Notes |
 |:---:|:---:|:---:|:---:|:---:|:---|
-| v1 | **`0.952664`** | **`0.952668`** | `0.543329` | *Queued Priority #1 for Quota Reset* | 👑 **ALL-TIME HISTORIC 5-FOLD CV RECORD (+6.73 pts over Grand Apex, +4.84 pts fold mean over ApexTabM)!** Solves the rare-event (1.67% fraud) class asymmetry by replacing symmetric mid-rank logit with power-scaled rank mapping ($r_{\text{scaled}} = r^{3.5}$). Compresses the non-fraud background bulk ($r \le 0.85$) while expanding the fraud-dense top decile, allowing the 4 orthogonal directional deltas (TabM, ResNet entity embeddings, 10-bag GBDT diversity, shallow L3 regularization) to achieve maximum discriminative separation across all 5 folds (Fold 0: `0.951940`, Fold 1: `0.952658`, Fold 2: `0.957501`, Fold 3: `0.952880`, Fold 4: `0.948363`). |
+| v1 | **`0.952664`** | **`0.952668`** | `0.543329` | **`0.95457`** | 👑 **ALL-TIME HISTORIC 5-FOLD CV RECORD (+6.73 pts over Grand Apex, +4.84 pts fold mean over ApexTabM)!** Solves the rare-event (1.67% fraud) class asymmetry by replacing symmetric mid-rank logit with power-scaled rank mapping ($r_{\text{scaled}} = r^{3.5}$). Compresses the non-fraud background bulk ($r \le 0.85$) while expanding the fraud-dense top decile, allowing the 4 orthogonal directional deltas (TabM, ResNet entity embeddings, 10-bag GBDT diversity, shallow L3 regularization) to achieve maximum discriminative separation across all 5 folds (Fold 0: `0.951940`, Fold 1: `0.952658`, Fold 2: `0.957501`, Fold 3: `0.952880`, Fold 4: `0.948363`). Scored 0.95457 on Public LB (+0.01 pt over unscaled quad). |
 
 ### Tri-Ladder Power-Scaled Quad Meta-Apex (3-Ladder Consensus Hybrid)
 
 | Version | 5-Fold OOF CV Reference | Public LB | Notes |
 |:---:|:---:|:---:|:---|
-| v1 | `0.952664` | *Queued Priority #2 for Quota Reset* | 🥈 **Public LB Consensus Shield.** Blends 85% Power-Scaled Quad-Directional (`0.952664` CV) with 15% 3-Ladder Consensus (`candidate_three_bases.csv`) in logit-rank space. Combines peak 5-fold CV with multi-author frontier stability. |
+| v1 | `0.952664` | **`0.95459`** | 🥈 **Public LB Consensus Shield.** Blends 85% Power-Scaled Quad-Directional (`0.952664` CV) with 15% 3-Ladder Consensus (`candidate_three_bases.csv`) in logit-rank space. Combines peak 5-fold CV with multi-author frontier stability (+0.02 pt over pure power quad). |
 
 ### Frontier Apex Quad-Directional Multi-Paradigm (TabM + ResNet + GBDT Diversity + Shallow L3)
 
