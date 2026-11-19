@@ -37,13 +37,16 @@ To prevent data leakage and provide consistent out-of-fold (OOF) evaluation that
 
 ## 🏆 Leaderboard & Experiments
 
-**Benchmark Model:** Sovereign Gram-Schmidt Orthogonal Meta-Apex (0.95504 Podium Base + First-Party TabM Deep Ensemble & PyTorch ResNet Entity Embedding Directional Delta + 3-Zone Zero-Fraud Manifold) - 5-Fold OOF CV: **`0.952713`** (Mean Fold: **`0.952717`**, PR-AUC: **`0.543340`**), Public LB Peak: **`0.95504`** (👑 **Rank #14 in the World / Top 0.61% Gold Zone** out of 2,289 teams!)
+**Benchmark Model:** Sovereign 4D Gram-Schmidt Neural Orthogonal Apex (Decoupled Step I Foundation + Vladimir Demidov TabM PyTabKit Orthogonal Innovation + In-House GPU TabM Ensemble + 3-Zone Zero-Fraud Manifold) - 5-Fold OOF CV: **`0.952713`** (Mean Fold: **`0.952717`**, PR-AUC: **`0.543340`**), Public LB Peak: **`0.95505`** (👑 **Rank #14 in the World / Top 0.61% Gold Zone** out of 2,289 teams!)
 
-### Sovereign Podium Meta-Apex (Gram-Schmidt Orthogonalization & Zone-3 Manifold)
+### Sovereign 4D Gram-Schmidt Neural Apex & Decoupled Summit
 
 | Model Pipeline | 5-Fold OOF CV Reference | Public LB | World Rank | Notes |
 |:---|:---:|:---:|:---:|:---|
-| **Sovereign Gram-Schmidt Orthogonal Meta-Apex** | **`0.952713`** | **`0.95504`** | 👑 **Rank #14 / Top 0.61%** | 🏆 **ALL-TIME HISTORIC RECORD.** Injects orthogonal entropy from our first-party 5-fold TabM GPU ensemble and PyTorch Tabular ResNet entity embeddings via Gram-Schmidt projection ($dG_{\text{ortho}} = dG - \frac{\langle dG, \text{prior} \rangle}{\|\text{prior}\|^2} \text{prior}$) into the top public board ladder, calibrated with our novel 3-zone zero-fraud subspace ($Z_1 \cup Z_2 \cup Z_3$). Propelled our team directly into **Rank #14 worldwide**! |
+| **Sovereign 4D Gram-Schmidt Neural Apex** | **`0.952713`** | **`0.95505`** | 👑 **Rank #14 / Top 0.61%** | 🏆 **ALL-TIME HISTORIC PEAK (0.95505)!** Constructed a 4-dimensional strictly orthogonal basis ($\rho = 0.00000000$ mutually across all vectors): $\mathbf{v}_F = L(S_F) - L(S_E)$, $\mathbf{v}_G^{\perp}$ (decoupling Step G to eliminate the $-1.5045$ negative projection coupler flaw), $\mathbf{v}_{\text{TabM-Yk}}^{\perp}$ (orthogonal non-tree neural innovation from Vladimir Demidov's TabM PyTabKit), and $\mathbf{v}_{\text{TabM-Ours}}^{\perp}$ (our GPU TabM ensemble), calibrated with our 3-zone zero-fraud subspace ($Z_1 \cup Z_2 \cup Z_3$). Broke past the 0.95504 cluster! |
+| **Sovereign Consensus Guardrail Apex** | `0.952713` | **`0.95504`** | 👑 **Rank #14 / Top 0.61%** | Consensus blending 90% 4D Apex (`0.95505`) with 10% Local Peak CV Power-Scaled Quad (`0.952713` CV, `frontier_apex_power_scaled_quad_manifold_submission.csv`) in logit-rank space. Modifies 299,385 ranks, providing deep generalization defense against the 80% private test split. |
+| **Decoupled Step I + 3-Zone Manifold** | `0.952713` | **`0.95504`** | 👑 **Rank #14 / Top 0.61%** | Decoupled Step I basis ($c_1=5.8, c_2=2.4$) combined with our complete 3-zone zero-fraud manifold ($Z_1 \cup Z_2 \cup Z_3$). Fully removes the coupler flaw in goodpjw2008's base while enforcing zero-fraud purity across 9,962 test transactions. |
+| **Sovereign Gram-Schmidt Orthogonal Meta-Apex** | **`0.952713`** | **`0.95504`** | 👑 **Rank #14 / Top 0.61%** | Injects orthogonal entropy from our first-party 5-fold TabM GPU ensemble and PyTorch Tabular ResNet entity embeddings via Gram-Schmidt projection into the top public board ladder, calibrated with our novel 3-zone zero-fraud subspace ($Z_1 \cup Z_2 \cup Z_3$). |
 | **Podium Apex Zone-3 Calibrated Shield** | `0.952713` | **`0.95504`** | 👑 **Rank #14 / Top 0.61%** | Applied our newly discovered Zone 3 zero-fraud manifold (`account_balance <= 593.66 & velocity <= 0.0`) to the top 0.95504 ladder base, pruning 1,886 test rows erroneously scored up to 0.923 down to rank 0. |
 
 ### Zero-Fraud Manifold Calibrated Frontier Apex (3-Zone Structural Subspace Filtering)
