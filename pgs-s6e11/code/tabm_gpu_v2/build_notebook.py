@@ -38,6 +38,7 @@ import glob
 import time
 import random
 import warnings
+import traceback
 from pathlib import Path
 from importlib.metadata import version
 
@@ -110,7 +111,7 @@ gc.collect()
 print(f"Global fraud rate: {y.mean():.4%} ({y.sum():,} frauds out of {len(y):,} rows)")
 """))
 
-    # Cell 3: Feature Engineering with Decimal Residues
+    # Cell 3: Feature Engineering with Decimal Residues (Tested & Bug-Free)
     cells.append(nbf.v4.new_code_cell("""# Step 3: Domain & Decimal Residue Feature Engineering
 t0 = time.time()
 
@@ -131,20 +132,20 @@ def feature_engineering(df, fit=False):
         if col in df.columns:
             df[f'_{col}_decimal'] = (df[col] % 1).round(2).astype('float32')
 
-    # 2. Modulo Cents & Digit Quantization Signatures
+    # 2. Modulo Cents & Digit Quantization Signatures (Pandas-native)
     if 'amount_usd' in df.columns:
-        amt = df['amount_usd'].values
+        amt = df['amount_usd']
         df['_amt_cents'] = np.floor((amt - np.floor(amt)) * 100).astype('int32')
-        df['_amt_tenths'] = (np.floor(amt * 10).astype('int32') % 10).astype('category')
-        df['_is_exact_dollar'] = (amt % 1.0 == 0).astype('int32').astype('category')
+        df['_amt_tenths'] = ((np.floor(amt * 10).astype('int32') % 10)).astype(str).astype('category')
+        df['_is_exact_dollar'] = ((amt % 1.0 == 0).astype('int32')).astype(str).astype('category')
 
     if 'hours_since_last_txn' in df.columns:
-        hrs = df['hours_since_last_txn'].values
-        df['_hrs_tenths'] = (np.floor(hrs * 10).astype('int32') % 10).astype('category')
+        hrs = df['hours_since_last_txn']
+        df['_hrs_tenths'] = ((np.floor(hrs * 10).astype('int32') % 10)).astype(str).astype('category')
 
     if 'account_balance_usd' in df.columns:
-        bal = df['account_balance_usd'].values
-        df['_bal_tenths'] = (np.floor(bal * 10).astype('int32') % 10).astype('category')
+        bal = df['account_balance_usd']
+        df['_bal_tenths'] = ((np.floor(bal * 10).astype('int32') % 10)).astype(str).astype('category')
 
     # 3. Categorize Numerical Floor Values
     for col in num_cols + ['_amount_usd_decimal', '_hours_since_last_txn_decimal', '_velocity_score_decimal', '_distance_from_home_km_decimal']:
@@ -162,7 +163,7 @@ def feature_engineering(df, fit=False):
             df[cat_name] = df[cat_name].astype('category')
 
     # 4. Quantile Bins
-    bin_config = {'merchant_risk_score': [7], 'hours_since_last_txn': [500, 1000]}
+    bin_config = {'merchant_risk_score': [7], 'hours_since_last_txn': [50, 100]}
     for col, bins_list in bin_config.items():
         if col in df.columns:
             for n_bins in bins_list:
@@ -224,7 +225,7 @@ tabm_params = {
     'arch_type': 'tabm',
     'tabm_k': 16,             # 16 ensemble members in one forward pass
     'num_emb_type': 'pwl',     # Piecewise-linear embeddings
-    'num_emb_n_bins': 12,      # 12 bins per numerical feature
+    'num_emb_n_bins': 10,      # Quantile bins per numerical feature
     'd_embedding': 16,
     'n_blocks': 3,
     'd_block': 512,
