@@ -208,8 +208,13 @@ oof_preds = np.zeros(len(y), dtype=np.float32)
 test_preds = np.zeros(len(X_test), dtype=np.float32)
 
 tabm_base_params = {
-    'k': 32,                 # Scaled up to 32 parallel ensemble slices
-    'embedding_type': 'pwl', # Piecewise linear numerical embeddings
+    'verbosity': 1,
+    'val_metric_name': '1-auc_ovr',
+    'arch_type': 'tabm',
+    'tabm_k': 32,             # Scaled to 32 parallel ensemble slices
+    'num_emb_type': 'pwl',     # Piecewise linear numerical embeddings
+    'num_emb_n_bins': 12,      # Quantile bins per numerical feature
+    'd_embedding': 16,
     'n_blocks': 3,
     'd_block': 512,
     'dropout': 0.02,
